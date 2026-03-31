@@ -1,4 +1,4 @@
-import { PrismaClient } from "../app/generated/prisma/client.js";
+import { PrismaClient } from "../app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -10,64 +10,83 @@ const API_KEY = process.env.KYUJIN_BOX_API_KEY!;
 const PUBLISHER_ID = process.env.KYUJIN_BOX_PUBLISHER_ID!;
 const DOMAIN = process.env.KYUJIN_BOX_DOMAIN!;
 
-const SEARCH_PARAMS = [
-  { kw: "動画編集", area: "東京都" },
-  { kw: "映像制作", area: "東京都" },
-  { kw: "動画編集", area: "大阪府" },
-];
-
 async function fetchJobs() {
-  for (const params of SEARCH_PARAMS) {
-    const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
-    url.searchParams.set("key", API_KEY);
-    url.searchParams.set("publisher", PUBLISHER_ID);
-    url.searchParams.set("domain", DOMAIN);
-    url.searchParams.set("format", "json");
-    url.searchParams.set("kw", params.kw);
-    url.searchParams.set("area", params.area);
-    url.searchParams.set("filter", "2");
-    url.searchParams.set("start", "1");
-    url.searchParams.set("limit", "50");
-    url.searchParams.set("ip", "0.0.0.0");
-    url.searchParams.set("ua", "ua");
+  const keywords = await prisma.searchKeyword.findMany({
+    where: { isActive: true },
+    orderBy: { id: "asc" },
+  });
 
-    const res = await fetch(url.toString());
-    const data = await res.json();
-console.log(JSON.stringify(data.results?.[0], null, 2)); // 最初の1件だけ表示
-
-    if (!data.results) {
-      console.error("エラー:", data);
-      continue;
-    }
-
-    for (const job of data.results) {
-      await prisma.job.upsert({
-        where: { url: job.url },
-        update: {
-          title: job.title,
-          company: job.company,
-          jt: job.jt,
-          st: job.st,
-          area: job.area,
-          snippet: job.snippet,
-          update: job.update ? new Date(job.update) : null,
-          tracking: job.tracking,
-        },
-        create: {
-          url: job.url,
-          title: job.title,
-          company: job.company,
-          jt: job.jt,
-          st: job.st,
-          area: job.area,
-          snippet: job.snippet,
-          update: job.update ? new Date(job.update) : null,
-          tracking: job.tracking,
-        },
-      });
-    }
-    console.log(`${params.kw} / ${params.area}: ${data.results.length}件保存`);
+  if (keywords.length === 0) {
+    console.log("キーワードがありません");
+    await prisma.$disconnect();
+    return;
   }
+
+  // 今の分数でキーワードをローテーション
+  const minute = new Date().getMinutes();
+  const target = keywords[minute % keywords.length];
+
+  const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
+  url.searchParams.set("key", API_KEY);
+  url.searchParams.set("publisher", PUBLISHER_ID);
+  url.searchParams.set("domain", DOMAIN);
+  url.searchParams.set("format", "json");
+  url.searchParams.set("kw", target.keyword);
+  url.searchParams.set("filter", "2");
+  url.searchParams.set("start", "1");
+  url.searchParams.set("limit", "50");
+  url.searchParams.set("ip", "0.0.0.0");
+  url.searchParams.set("ua", "ua");
+
+  const res = await fetch(url.toString());
+  const data = await res.json();
+
+  if (!data.results) {
+    console.error(`エラー [${target.keyword}]:`, data);
+    await prisma.$disconnect();
+    return;
+  }
+
+  // 取得した求人を保存
+  for (const job of data.results) {
+    await prisma.job.upsert({
+      where: { url: job.url },
+      update: {
+        title: job.title,
+        company: job.company,
+        jt: job.jt,
+        st: job.st,
+        area: job.area,
+        snippet: job.snippet,
+        update: job.update ? new Date(job.update) : null,
+        tracking: job.tracking,
+      },
+      create: {
+        url: job.url,
+        title: job.title,
+        company: job.company,
+        jt: job.jt,
+        st: job.st,
+        area: job.area,
+        snippet: job.snippet,
+        update: job.update ? new Date(job.update) : null,
+        tracking: job.tracking,
+      },
+    });
+  }
+
+  // 今回取得したURL以外を削除
+  const fetchedUrls = data.results.map((job: any) => job.url);
+  const deleted = await prisma.job.deleteMany({
+    where: {
+      url: { notIn: fetchedUrls },
+    },
+  });
+  if (deleted.count > 0) {
+    console.log(`${deleted.count}件削除`);
+  }
+
+  console.log(`[${new Date().toISOString()}] ${target.keyword}: ${data.results.length}件保存 (total: ${data.total})`);
 
   await prisma.$disconnect();
 }
