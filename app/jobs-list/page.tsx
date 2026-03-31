@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Layout from "@/components/Layout/Layout";
 import BlogSlider from "@/components/sliders/Blog";
+import { Briefcase, MapPin, Grid3X3, Search, ChevronDown } from "lucide-react";
 
 export default function JobList() {
   return (
@@ -13,312 +14,219 @@ export default function JobList() {
               <div className="banner-hero banner-single banner-single-bg">
                 <div className="block-banner text-center">
                   <h3 className="wow animate__animated animate__fadeInUp">
-                    <span className="color-brand-2">22 Jobs</span> Available Now
+                    <span className="color-brand-2">22件の求人</span> を掲載中
                   </h3>
-                  <div className="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero repellendus magni, <br className="d-none d-xl-block" />
-                    atque delectus molestias quis?
+                  <div
+                    className="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp"
+                    data-wow-delay=".1s"
+                  >
+                    映像制作者・動画クリエイター向けの求人を検索できます。
+                    <br className="d-none d-xl-block" />
+                    条件に合った案件や転職先を見つけましょう。
                   </div>
-                  <div className="form-find text-start mt-40 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                    <form>
-                      <div className="box-industry">
-                        <select className="form-input mr-10 select-active input-industry">
-                          <option value={0}>Industry</option>
-                          <option value={1}>Software</option>
-                          <option value={2}>Finance</option>
-                          <option value={3}>Recruting</option>
-                          <option value={4}>Management</option>
-                          <option value={5}>Advertising</option>
-                          <option value={6}>Development</option>
+
+                  <div
+                    className="form-find text-start mt-40 wow animate__animated animate__fadeInUp"
+                    data-wow-delay=".2s"
+                  >
+                    <form
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.5fr auto",
+                        gap: "0",
+                        alignItems: "center",
+                        maxWidth: "1680px",
+                        width: "100%",
+                        margin: "0 auto",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          padding: "0 18px",
+                          borderRight: "1px solid #e5e7eb",
+                          minHeight: "56px",
+                        }}
+                      >
+                        <Briefcase size={18} color="#94a3b8" />
+                        <select
+                          className="form-input"
+                          style={{
+                            border: "none",
+                            boxShadow: "none",
+                            padding: 0,
+                            background: "transparent",
+                            appearance: "none",
+                            WebkitAppearance: "none",
+                            MozAppearance: "none",
+                          }}
+                        >
+                          <option value="">働き方</option>
+                          <option value="fulltime">正社員</option>
+                          <option value="contract">業務委託</option>
+                          <option value="parttime">アルバイト</option>
+                          <option value="freelance">フリーランス</option>
+                          <option value="intern">インターン</option>
                         </select>
+                        <ChevronDown size={16} color="#94a3b8" />
                       </div>
-                      <div className="box-industry">
-                        <select className="form-input mr-10 select-active input-location">
-                          <option value="">Location</option>
-                          <option value="AX">Aland Islands</option>
-                          <option value="AF">Afghanistan</option>
-                          <option value="AL">Albania</option>
-                          <option value="DZ">Algeria</option>
-                          <option value="AD">Andorra</option>
-                          <option value="AO">Angola</option>
-                          <option value="AI">Anguilla</option>
-                          <option value="AQ">Antarctica</option>
-                          <option value="AG">Antigua and Barbuda</option>
-                          <option value="AR">Argentina</option>
-                          <option value="AM">Armenia</option>
-                          <option value="AW">Aruba</option>
-                          <option value="AU">Australia</option>
-                          <option value="AT">Austria</option>
-                          <option value="AZ">Azerbaijan</option>
-                          <option value="BS">Bahamas</option>
-                          <option value="BH">Bahrain</option>
-                          <option value="BD">Bangladesh</option>
-                          <option value="BB">Barbados</option>
-                          <option value="BY">Belarus</option>
-                          <option value="PW">Belau</option>
-                          <option value="BE">Belgium</option>
-                          <option value="BZ">Belize</option>
-                          <option value="BJ">Benin</option>
-                          <option value="BM">Bermuda</option>
-                          <option value="BT">Bhutan</option>
-                          <option value="BO">Bolivia</option>
-                          <option value="BQ">Bonaire, Saint Eustatius and Saba</option>
-                          <option value="BA">Bosnia and Herzegovina</option>
-                          <option value="BW">Botswana</option>
-                          <option value="BV">Bouvet Island</option>
-                          <option value="BR">Brazil</option>
-                          <option value="IO">British Indian Ocean Territory</option>
-                          <option value="VG">British Virgin Islands</option>
-                          <option value="BN">Brunei</option>
-                          <option value="BG">Bulgaria</option>
-                          <option value="BF">Burkina Faso</option>
-                          <option value="BI">Burundi</option>
-                          <option value="KH">Cambodia</option>
-                          <option value="CM">Cameroon</option>
-                          <option value="CA">Canada</option>
-                          <option value="CV">Cape Verde</option>
-                          <option value="KY">Cayman Islands</option>
-                          <option value="CF">Central African Republic</option>
-                          <option value="TD">Chad</option>
-                          <option value="CL">Chile</option>
-                          <option value="CN">China</option>
-                          <option value="CX">Christmas Island</option>
-                          <option value="CC">Cocos (Keeling) Islands</option>
-                          <option value="CO">Colombia</option>
-                          <option value="KM">Comoros</option>
-                          <option value="CG">Congo (Brazzaville)</option>
-                          <option value="CD">Congo (Kinshasa)</option>
-                          <option value="CK">Cook Islands</option>
-                          <option value="CR">Costa Rica</option>
-                          <option value="HR">Croatia</option>
-                          <option value="CU">Cuba</option>
-                          <option value="CW">CuraÇao</option>
-                          <option value="CY">Cyprus</option>
-                          <option value="CZ">Czech Republic</option>
-                          <option value="DK">Denmark</option>
-                          <option value="DJ">Djibouti</option>
-                          <option value="DM">Dominica</option>
-                          <option value="DO">Dominican Republic</option>
-                          <option value="EC">Ecuador</option>
-                          <option value="EG">Egypt</option>
-                          <option value="SV">El Salvador</option>
-                          <option value="GQ">Equatorial Guinea</option>
-                          <option value="ER">Eritrea</option>
-                          <option value="EE">Estonia</option>
-                          <option value="ET">Ethiopia</option>
-                          <option value="FK">Falkland Islands</option>
-                          <option value="FO">Faroe Islands</option>
-                          <option value="FJ">Fiji</option>
-                          <option value="FI">Finland</option>
-                          <option value="FR">France</option>
-                          <option value="GF">French Guiana</option>
-                          <option value="PF">French Polynesia</option>
-                          <option value="TF">French Southern Territories</option>
-                          <option value="GA">Gabon</option>
-                          <option value="GM">Gambia</option>
-                          <option value="GE">Georgia</option>
-                          <option value="DE">Germany</option>
-                          <option value="GH">Ghana</option>
-                          <option value="GI">Gibraltar</option>
-                          <option value="GR">Greece</option>
-                          <option value="GL">Greenland</option>
-                          <option value="GD">Grenada</option>
-                          <option value="GP">Guadeloupe</option>
-                          <option value="GT">Guatemala</option>
-                          <option value="GG">Guernsey</option>
-                          <option value="GN">Guinea</option>
-                          <option value="GW">Guinea-Bissau</option>
-                          <option value="GY">Guyana</option>
-                          <option value="HT">Haiti</option>
-                          <option value="HM">Heard Island and McDonald Islands</option>
-                          <option value="HN">Honduras</option>
-                          <option value="HK">Hong Kong</option>
-                          <option value="HU">Hungary</option>
-                          <option value="IS">Iceland</option>
-                          <option value="IN">India</option>
-                          <option value="ID">Indonesia</option>
-                          <option value="IR">Iran</option>
-                          <option value="IQ">Iraq</option>
-                          <option value="IM">Isle of Man</option>
-                          <option value="IL">Israel</option>
-                          <option value="IT">Italy</option>
-                          <option value="CI">Ivory Coast</option>
-                          <option value="JM">Jamaica</option>
-                          <option value="JP">Japan</option>
-                          <option value="JE">Jersey</option>
-                          <option value="JO">Jordan</option>
-                          <option value="KZ">Kazakhstan</option>
-                          <option value="KE">Kenya</option>
-                          <option value="KI">Kiribati</option>
-                          <option value="KW">Kuwait</option>
-                          <option value="KG">Kyrgyzstan</option>
-                          <option value="LA">Laos</option>
-                          <option value="LV">Latvia</option>
-                          <option value="LB">Lebanon</option>
-                          <option value="LS">Lesotho</option>
-                          <option value="LR">Liberia</option>
-                          <option value="LY">Libya</option>
-                          <option value="LI">Liechtenstein</option>
-                          <option value="LT">Lithuania</option>
-                          <option value="LU">Luxembourg</option>
-                          <option value="MO">Macao S.A.R., China</option>
-                          <option value="MK">Macedonia</option>
-                          <option value="MG">Madagascar</option>
-                          <option value="MW">Malawi</option>
-                          <option value="MY">Malaysia</option>
-                          <option value="MV">Maldives</option>
-                          <option value="ML">Mali</option>
-                          <option value="MT">Malta</option>
-                          <option value="MH">Marshall Islands</option>
-                          <option value="MQ">Martinique</option>
-                          <option value="MR">Mauritania</option>
-                          <option value="MU">Mauritius</option>
-                          <option value="YT">Mayotte</option>
-                          <option value="MX">Mexico</option>
-                          <option value="FM">Micronesia</option>
-                          <option value="MD">Moldova</option>
-                          <option value="MC">Monaco</option>
-                          <option value="MN">Mongolia</option>
-                          <option value="ME">Montenegro</option>
-                          <option value="MS">Montserrat</option>
-                          <option value="MA">Morocco</option>
-                          <option value="MZ">Mozambique</option>
-                          <option value="MM">Myanmar</option>
-                          <option value="NA">Namibia</option>
-                          <option value="NR">Nauru</option>
-                          <option value="NP">Nepal</option>
-                          <option value="NL">Netherlands</option>
-                          <option value="AN">Netherlands Antilles</option>
-                          <option value="NC">New Caledonia</option>
-                          <option value="NZ">New Zealand</option>
-                          <option value="NI">Nicaragua</option>
-                          <option value="NE">Niger</option>
-                          <option value="NG">Nigeria</option>
-                          <option value="NU">Niue</option>
-                          <option value="NF">Norfolk Island</option>
-                          <option value="KP">North Korea</option>
-                          <option value="NO">Norway</option>
-                          <option value="OM">Oman</option>
-                          <option value="PK">Pakistan</option>
-                          <option value="PS">Palestinian Territory</option>
-                          <option value="PA">Panama</option>
-                          <option value="PG">Papua New Guinea</option>
-                          <option value="PY">Paraguay</option>
-                          <option value="PE">Peru</option>
-                          <option value="PH">Philippines</option>
-                          <option value="PN">Pitcairn</option>
-                          <option value="PL">Poland</option>
-                          <option value="PT">Portugal</option>
-                          <option value="QA">Qatar</option>
-                          <option value="IE">Republic of Ireland</option>
-                          <option value="RE">Reunion</option>
-                          <option value="RO">Romania</option>
-                          <option value="RU">Russia</option>
-                          <option value="RW">Rwanda</option>
-                          <option value="ST">São Tomé and Príncipe</option>
-                          <option value="BL">Saint Barthélemy</option>
-                          <option value="SH">Saint Helena</option>
-                          <option value="KN">Saint Kitts and Nevis</option>
-                          <option value="LC">Saint Lucia</option>
-                          <option value="SX">Saint Martin (Dutch part)</option>
-                          <option value="MF">Saint Martin (French part)</option>
-                          <option value="PM">Saint Pierre and Miquelon</option>
-                          <option value="VC">Saint Vincent and the Grenadines</option>
-                          <option value="SM">San Marino</option>
-                          <option value="SA">Saudi Arabia</option>
-                          <option value="SN">Senegal</option>
-                          <option value="RS">Serbia</option>
-                          <option value="SC">Seychelles</option>
-                          <option value="SL">Sierra Leone</option>
-                          <option value="SG">Singapore</option>
-                          <option value="SK">Slovakia</option>
-                          <option value="SI">Slovenia</option>
-                          <option value="SB">Solomon Islands</option>
-                          <option value="SO">Somalia</option>
-                          <option value="ZA">South Africa</option>
-                          <option value="GS">South Georgia/Sandwich Islands</option>
-                          <option value="KR">South Korea</option>
-                          <option value="SS">South Sudan</option>
-                          <option value="ES">Spain</option>
-                          <option value="LK">Sri Lanka</option>
-                          <option value="SD">Sudan</option>
-                          <option value="SR">Suriname</option>
-                          <option value="SJ">Svalbard and Jan Mayen</option>
-                          <option value="SZ">Swaziland</option>
-                          <option value="SE">Sweden</option>
-                          <option value="CH">Switzerland</option>
-                          <option value="SY">Syria</option>
-                          <option value="TW">Taiwan</option>
-                          <option value="TJ">Tajikistan</option>
-                          <option value="TZ">Tanzania</option>
-                          <option value="TH">Thailand</option>
-                          <option value="TL">Timor-Leste</option>
-                          <option value="TG">Togo</option>
-                          <option value="TK">Tokelau</option>
-                          <option value="TO">Tonga</option>
-                          <option value="TT">Trinidad and Tobago</option>
-                          <option value="TN">Tunisia</option>
-                          <option value="TR">Turkey</option>
-                          <option value="TM">Turkmenistan</option>
-                          <option value="TC">Turks and Caicos Islands</option>
-                          <option value="TV">Tuvalu</option>
-                          <option value="UG">Uganda</option>
-                          <option value="UA">Ukraine</option>
-                          <option value="AE">United Arab Emirates</option>
-                          <option value="GB">United Kingdom (UK)</option>
-                          <option value="US">USA (US)</option>
-                          <option value="UY">Uruguay</option>
-                          <option value="UZ">Uzbekistan</option>
-                          <option value="VU">Vanuatu</option>
-                          <option value="VA">Vatican</option>
-                          <option value="VE">Venezuela</option>
-                          <option value="VN">Vietnam</option>
-                          <option value="WF">Wallis and Futuna</option>
-                          <option value="EH">Western Sahara</option>
-                          <option value="WS">Western Samoa</option>
-                          <option value="YE">Yemen</option>
-                          <option value="ZM">Zambia</option>
-                          <option value="ZW">Zimbabwe</option>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          padding: "0 18px",
+                          borderRight: "1px solid #e5e7eb",
+                          minHeight: "56px",
+                        }}
+                      >
+                        <MapPin size={18} color="#94a3b8" />
+                        <select
+                          className="form-input"
+                          style={{
+                            border: "none",
+                            boxShadow: "none",
+                            padding: 0,
+                            background: "transparent",
+                            appearance: "none",
+                            WebkitAppearance: "none",
+                            MozAppearance: "none",
+                          }}
+                        >
+                          <option value="">エリア</option>
+                          <option value="tokyo">東京</option>
+                          <option value="osaka">大阪</option>
+                          <option value="nagoya">名古屋</option>
+                          <option value="fukuoka">福岡</option>
+                          <option value="sapporo">札幌</option>
+                          <option value="remote">リモート</option>
                         </select>
+                        <ChevronDown size={16} color="#94a3b8" />
                       </div>
-                      <input className="form-input input-keysearch mr-10" type="text" placeholder="Your keyword... " />
-                      <button className="btn btn-default btn-find font-sm">Search</button>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          padding: "0 18px",
+                          borderRight: "1px solid #e5e7eb",
+                          minHeight: "56px",
+                        }}
+                      >
+                        <Grid3X3 size={18} color="#94a3b8" />
+                        <select
+                          className="form-input"
+                          style={{
+                            border: "none",
+                            boxShadow: "none",
+                            padding: 0,
+                            background: "transparent",
+                            appearance: "none",
+                            WebkitAppearance: "none",
+                            MozAppearance: "none",
+                          }}
+                        >
+                          <option value="">カテゴリ</option>
+                          <option value="editing">動画編集</option>
+                          <option value="production">映像制作</option>
+                          <option value="director">ディレクター</option>
+                          <option value="shooting">撮影</option>
+                          <option value="motion">モーショングラフィックス</option>
+                          <option value="cg">CG・アニメーション</option>
+                        </select>
+                        <ChevronDown size={16} color="#94a3b8" />
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          padding: "0 18px",
+                          minHeight: "56px",
+                        }}
+                      >
+                        <Search size={18} color="#94a3b8" />
+                        <input
+                          className="form-input"
+                          type="text"
+                          placeholder="キーワードを入力"
+                          style={{
+                            border: "none",
+                            boxShadow: "none",
+                            padding: 0,
+                            background: "transparent",
+                          }}
+                        />
+                      </div>
+
+                      <button
+                        className="btn btn-default font-sm"
+                        style={{
+                          minWidth: "160px",
+                          height: "56px",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRadius: "16px",
+                          marginLeft: "10px",
+                        }}
+                      >
+                        <Search size={18} style={{ marginRight: "8px" }} />
+                        検索する
+                      </button>
                     </form>
                   </div>
                 </div>
               </div>
             </div>
           </section>
+
           <section className="section-box mt-30">
             <div className="container">
-              <div className="row flex-row-reverse">
-                <div className="col-lg-9 col-md-12 col-sm-12 col-12 float-right">
+              <div className="row">
+                {/* 左：求人一覧 */}
+                <div className="col-lg-5 col-md-12 col-sm-12 col-12">
                   <div className="content-page">
                     <div className="box-filters-job">
-                      <div className="row">
-                        <div className="col-xl-6 col-lg-5">
+                      <div className="row align-items-center">
+                        <div className="col-xl-6 col-lg-12 col-md-6 col-sm-6 col-12">
                           <span className="text-small text-showing">
-                            Showing <strong>41-60 </strong>of <strong>944 </strong>jobs
+                            <strong>41-60件</strong> / <strong>944件</strong> を表示中
                           </span>
                         </div>
-                        <div className="col-xl-6 col-lg-7 text-lg-end mt-sm-15">
-                          <div className="display-flex2">
+                        <div className="col-xl-6 col-lg-12 col-md-6 col-sm-6 col-12 text-sm-end mt-15 mt-md-0">
+                          <div className="display-flex2 justify-content-sm-end">
                             <div className="box-border mr-10">
-                              <span className="text-sortby">Show:</span>
+                              <span className="text-sortby">表示件数:</span>
                               <div className="dropdown dropdown-sort">
-                                <button className="btn dropdown-toggle" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+                                <button
+                                  className="btn dropdown-toggle"
+                                  id="dropdownSort"
+                                  type="button"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                  data-bs-display="static"
+                                >
                                   <span>12</span>
                                   <i className="fi-rr-angle-small-down" />
                                 </button>
-                                <ul className="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort">
+                                <ul
+                                  className="dropdown-menu dropdown-menu-light"
+                                  aria-labelledby="dropdownSort"
+                                >
                                   <li>
                                     <Link href="#">
-                                      <span className="dropdown-item active">10</span>
+                                      <span className="dropdown-item">10</span>
                                     </Link>
                                   </li>
                                   <li>
                                     <Link href="#">
-                                      <span className="dropdown-item">12</span>
+                                      <span className="dropdown-item active">12</span>
                                     </Link>
                                   </li>
                                   <li>
@@ -329,279 +237,107 @@ export default function JobList() {
                                 </ul>
                               </div>
                             </div>
+
                             <div className="box-border">
-                              <span className="text-sortby">Sort by:</span>
+                              <span className="text-sortby">並び順:</span>
                               <div className="dropdown dropdown-sort">
-                                <button className="btn dropdown-toggle" id="dropdownSort2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
-                                  <span>Newest Post</span>
+                                <button
+                                  className="btn dropdown-toggle"
+                                  id="dropdownSort2"
+                                  type="button"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                  data-bs-display="static"
+                                >
+                                  <span>新着順</span>
                                   <i className="fi-rr-angle-small-down" />
                                 </button>
-                                <ul className="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort2">
+                                <ul
+                                  className="dropdown-menu dropdown-menu-light"
+                                  aria-labelledby="dropdownSort2"
+                                >
                                   <li>
                                     <Link href="#">
-                                      <span className="dropdown-item active">Newest Post</span>
+                                      <span className="dropdown-item active">新着順</span>
                                     </Link>
                                   </li>
                                   <li>
                                     <Link href="#">
-                                      <span className="dropdown-item">Oldest Post</span>
+                                      <span className="dropdown-item">古い順</span>
                                     </Link>
                                   </li>
                                   <li>
                                     <Link href="#">
-                                      <span className="dropdown-item">Rating Post</span>
+                                      <span className="dropdown-item">人気順</span>
                                     </Link>
                                   </li>
                                 </ul>
                               </div>
                             </div>
-                            <div className="box-view-type">
-                              <Link href="/jobs-list">
-                                <span className="view-type">
-                                  <img src="assets/imgs/template/icons/icon-list.svg" alt="jobBox" />
-                                </span>
-                              </Link>
-
-                              <Link href="/jobs-grid">
-                                <span className="view-type">
-                                  <img src="assets/imgs/template/icons/icon-grid-hover.svg" alt="jobBox" />
-                                </span>
-                              </Link>
-                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
                     <div className="row display-list">
                       <div className="col-xl-12 col-12">
                         <div className="card-grid-2 hover-up">
                           <span className="flash" />
                           <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
+                            <div className="col-lg-7 col-md-7 col-sm-12">
                               <div className="card-grid-2-image-left">
                                 <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-1.png" alt="jobBox" />
-                                </div>
-                                <div className="right-info">
-                                  <Link href="#">
-                                    <span className="name-job">LinkedIn</span>
-                                  </Link>
-                                  <span className="location-small">New York, US</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
-                              <div className="pl-15 mb-15 mt-30">
-                                <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
-                                </Link>
-
-                                <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="card-block-info">
-                            <h4>
-                              <Link href="/job-details">
-                                <span>UI / UX Designer fulltime</span>
-                              </Link>
-                            </h4>
-                            <div className="mt-5">
-                              <span className="card-briefcase">Fulltime</span>
-                              <span className="card-time">
-                                <span>4</span>
-                                <span> mins ago</span>
-                              </span>
-                            </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur</p>
-                            <div className="card-2-bottom mt-20">
-                              <div className="row">
-                                <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$500</span>
-                                  <span className="text-muted">/Hour</span>
-                                </div>
-                                <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-xl-12 col-12">
-                        <div className="card-grid-2 hover-up">
-                          <span className="flash" />
-                          <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
-                              <div className="card-grid-2-image-left">
-                                <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-2.png" alt="jobBox" />
-                                </div>
-                                <div className="right-info">
-                                  <Link href="#">
-                                    <span className="name-job">Adobe Ilustrator</span>
-                                  </Link>
-                                  <span className="location-small">New York, US</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
-                              <div className="pl-15 mb-15 mt-30">
-                                <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
-                                </Link>
-
-                                <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="card-block-info">
-                            <h4>
-                              <Link href="/job-details">
-                                <span>Full Stack Engineer</span>
-                              </Link>
-                            </h4>
-                            <div className="mt-5">
-                              <span className="card-briefcase">Part time</span>
-                              <span className="card-time">
-                                <span>5</span>
-                                <span> mins ago</span>
-                              </span>
-                            </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur.</p>
-                            <div className="card-2-bottom mt-20">
-                              <div className="row">
-                                <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$800</span>
-                                  <span className="text-muted">/Hour</span>
-                                </div>
-                                <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-xl-12 col-12">
-                        <div className="card-grid-2 hover-up">
-                          <span className="flash" />
-                          <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
-                              <div className="card-grid-2-image-left">
-                                <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-3.png" alt="jobBox" />
-                                </div>
-                                <div className="right-info">
-                                  <Link href="#">
-                                    <span className="name-job">Bing Search</span>
-                                  </Link>
-                                  <span className="location-small">New York, US</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
-                              <div className="pl-15 mb-15 mt-30">
-                                <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
-                                </Link>
-
-                                <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="card-block-info">
-                            <h4>
-                              <Link href="/job-details">
-                                <span>Java Software Engineer</span>
-                              </Link>
-                            </h4>
-                            <div className="mt-5">
-                              <span className="card-briefcase">Full time</span>
-                              <span className="card-time">
-                                <span>6</span>
-                                <span> mins ago</span>
-                              </span>
-                            </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur.</p>
-                            <div className="card-2-bottom mt-20">
-                              <div className="row">
-                                <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$250</span>
-                                  <span className="text-muted">/Hour</span>
-                                </div>
-                                <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-xl-12 col-12">
-                        <div className="card-grid-2 hover-up">
-                          <span className="flash" />
-                          <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
-                              <div className="card-grid-2-image-left">
-                                <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-4.png" alt="jobBox" />
+                                  <img src="assets/imgs/brands/brand-4.png" alt="求人企業ロゴ" />
                                 </div>
                                 <div className="right-info">
                                   <Link href="#">
                                     <span className="name-job">Dailymotion</span>
                                   </Link>
-                                  <span className="location-small">New York, US</span>
+                                  <span className="location-small">東京都 / リモート可</span>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
+                            <div className="col-lg-5 text-start text-md-end pr-30 col-md-5 col-sm-12">
                               <div className="pl-15 mb-15 mt-30">
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
+                                  <span className="btn btn-grey-small mr-5">Premiere Pro</span>
                                 </Link>
-
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
+                                  <span className="btn btn-grey-small mr-5">After Effects</span>
                                 </Link>
                               </div>
                             </div>
                           </div>
+
                           <div className="card-block-info">
                             <h4>
-                              <Link href="/job-details">
-                                <span>Frontend Developer</span>
+                              <Link href="#">
+                                <span>フルスタックエンジニア</span>
                               </Link>
                             </h4>
                             <div className="mt-5">
-                              <span className="card-briefcase">Full time</span>
+                              <span className="card-briefcase">正社員</span>
                               <span className="card-time">
-                                <span>6</span>
-                                <span> mins ago</span>
+                                <span>3</span>
+                                <span>分前</span>
                               </span>
                             </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur.</p>
+                            <p className="font-sm color-text-paragraph mt-10">
+                              デジタル領域のサービス開発を推進するポジションです。プロダクト改善や新規機能開発に携わっていただきます。
+                            </p>
                             <div className="card-2-bottom mt-20">
                               <div className="row">
                                 <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$250</span>
-                                  <span className="text-muted">/Hour</span>
+                                  <span className="card-text-price">年収500万円</span>
+                                  <span className="text-muted">〜</span>
                                 </div>
                                 <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
+                                  <div
+                                    className="btn btn-apply-now"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#ModalApplyJobForm"
+                                  >
+                                    応募する
                                   </div>
                                 </div>
                               </div>
@@ -609,58 +345,65 @@ export default function JobList() {
                           </div>
                         </div>
                       </div>
+
                       <div className="col-xl-12 col-12">
                         <div className="card-grid-2 hover-up">
                           <span className="flash" />
                           <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
+                            <div className="col-lg-7 col-md-7 col-sm-12">
                               <div className="card-grid-2-image-left">
                                 <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-5.png" alt="jobBox" />
+                                  <img src="assets/imgs/brands/brand-2.png" alt="求人企業ロゴ" />
                                 </div>
                                 <div className="right-info">
                                   <Link href="#">
-                                    <span className="name-job">Linkedin</span>
+                                    <span className="name-job">Adobe Illustrator</span>
                                   </Link>
-                                  <span className="location-small">New York, US</span>
+                                  <span className="location-small">東京都渋谷区</span>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
+                            <div className="col-lg-5 text-start text-md-end pr-30 col-md-5 col-sm-12">
                               <div className="pl-15 mb-15 mt-30">
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
+                                  <span className="btn btn-grey-small mr-5">Photoshop</span>
                                 </Link>
-
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
+                                  <span className="btn btn-grey-small mr-5">Illustrator</span>
                                 </Link>
                               </div>
                             </div>
                           </div>
+
                           <div className="card-block-info">
                             <h4>
-                              <Link href="/job-details">
-                                <span>React Native Web Developer</span>
+                              <Link href="#">
+                                <span>動画エディター</span>
                               </Link>
                             </h4>
                             <div className="mt-5">
-                              <span className="card-briefcase">Fulltime</span>
+                              <span className="card-briefcase">業務委託</span>
                               <span className="card-time">
-                                <span>4</span>
-                                <span> mins ago</span>
+                                <span>5</span>
+                                <span>分前</span>
                               </span>
                             </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur</p>
+                            <p className="font-sm color-text-paragraph mt-10">
+                              SNS動画や広告動画の編集を担当していただきます。短尺動画の制作経験がある方歓迎です。
+                            </p>
                             <div className="card-2-bottom mt-20">
                               <div className="row">
                                 <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$500</span>
-                                  <span className="text-muted">/Hour</span>
+                                  <span className="card-text-price">時給2,500円</span>
+                                  <span className="text-muted">〜</span>
                                 </div>
                                 <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
+                                  <div
+                                    className="btn btn-apply-now"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#ModalApplyJobForm"
+                                  >
+                                    応募する
                                   </div>
                                 </div>
                               </div>
@@ -668,58 +411,197 @@ export default function JobList() {
                           </div>
                         </div>
                       </div>
+
                       <div className="col-xl-12 col-12">
                         <div className="card-grid-2 hover-up">
                           <span className="flash" />
                           <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
+                            <div className="col-lg-7 col-md-7 col-sm-12">
                               <div className="card-grid-2-image-left">
                                 <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-6.png" alt="jobBox" />
+                                  <img src="assets/imgs/brands/brand-3.png" alt="求人企業ロゴ" />
+                                </div>
+                                <div className="right-info">
+                                  <Link href="#">
+                                    <span className="name-job">Bing Search</span>
+                                  </Link>
+                                  <span className="location-small">大阪府大阪市</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-lg-5 text-start text-md-end pr-30 col-md-5 col-sm-12">
+                              <div className="pl-15 mb-15 mt-30">
+                                <Link href="#">
+                                  <span className="btn btn-grey-small mr-5">撮影</span>
+                                </Link>
+                                <Link href="#">
+                                  <span className="btn btn-grey-small mr-5">編集</span>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="card-block-info">
+                            <h4>
+                              <Link href="#">
+                                <span>映像ディレクター</span>
+                              </Link>
+                            </h4>
+                            <div className="mt-5">
+                              <span className="card-briefcase">正社員</span>
+                              <span className="card-time">
+                                <span>6</span>
+                                <span>分前</span>
+                              </span>
+                            </div>
+                            <p className="font-sm color-text-paragraph mt-10">
+                              企画から撮影、編集ディレクションまで一貫して担当いただくポジションです。
+                            </p>
+                            <div className="card-2-bottom mt-20">
+                              <div className="row">
+                                <div className="col-lg-7 col-7">
+                                  <span className="card-text-price">年収450万円</span>
+                                  <span className="text-muted">〜</span>
+                                </div>
+                                <div className="col-lg-5 col-5 text-end">
+                                  <div
+                                    className="btn btn-apply-now"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#ModalApplyJobForm"
+                                  >
+                                    応募する
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-xl-12 col-12">
+                        <div className="card-grid-2 hover-up">
+                          <span className="flash" />
+                          <div className="row">
+                            <div className="col-lg-7 col-md-7 col-sm-12">
+                              <div className="card-grid-2-image-left">
+                                <div className="image-box">
+                                  <img src="assets/imgs/brands/brand-5.png" alt="求人企業ロゴ" />
+                                </div>
+                                <div className="right-info">
+                                  <Link href="#">
+                                    <span className="name-job">LinkedIn</span>
+                                  </Link>
+                                  <span className="location-small">神奈川県横浜市</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-lg-5 text-start text-md-end pr-30 col-md-5 col-sm-12">
+                              <div className="pl-15 mb-15 mt-30">
+                                <Link href="#">
+                                  <span className="btn btn-grey-small mr-5">SNS</span>
+                                </Link>
+                                <Link href="#">
+                                  <span className="btn btn-grey-small mr-5">広告運用</span>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="card-block-info">
+                            <h4>
+                              <Link href="#">
+                                <span>SNS動画クリエイター</span>
+                              </Link>
+                            </h4>
+                            <div className="mt-5">
+                              <span className="card-briefcase">アルバイト</span>
+                              <span className="card-time">
+                                <span>8</span>
+                                <span>分前</span>
+                              </span>
+                            </div>
+                            <p className="font-sm color-text-paragraph mt-10">
+                              TikTok・Instagram・YouTube Shorts向けの動画制作を行うポジションです。
+                            </p>
+                            <div className="card-2-bottom mt-20">
+                              <div className="row">
+                                <div className="col-lg-7 col-7">
+                                  <span className="card-text-price">時給1,800円</span>
+                                  <span className="text-muted">〜</span>
+                                </div>
+                                <div className="col-lg-5 col-5 text-end">
+                                  <div
+                                    className="btn btn-apply-now"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#ModalApplyJobForm"
+                                  >
+                                    応募する
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-xl-12 col-12">
+                        <div className="card-grid-2 hover-up">
+                          <span className="flash" />
+                          <div className="row">
+                            <div className="col-lg-7 col-md-7 col-sm-12">
+                              <div className="card-grid-2-image-left">
+                                <div className="image-box">
+                                  <img src="assets/imgs/brands/brand-6.png" alt="求人企業ロゴ" />
                                 </div>
                                 <div className="right-info">
                                   <Link href="#">
                                     <span className="name-job">Quora JSC</span>
                                   </Link>
-                                  <span className="location-small">New York, US</span>
+                                  <span className="location-small">福岡県福岡市</span>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
+                            <div className="col-lg-5 text-start text-md-end pr-30 col-md-5 col-sm-12">
                               <div className="pl-15 mb-15 mt-30">
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
+                                  <span className="btn btn-grey-small mr-5">企画</span>
                                 </Link>
-
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
+                                  <span className="btn btn-grey-small mr-5">構成</span>
                                 </Link>
                               </div>
                             </div>
                           </div>
+
                           <div className="card-block-info">
                             <h4>
-                              <Link href="/job-details">
-                                <span>Senior System Engineer</span>
+                              <Link href="#">
+                                <span>動画プランナー</span>
                               </Link>
                             </h4>
                             <div className="mt-5">
-                              <span className="card-briefcase">Part time</span>
+                              <span className="card-briefcase">正社員</span>
                               <span className="card-time">
-                                <span>5</span>
-                                <span> mins ago</span>
+                                <span>10</span>
+                                <span>分前</span>
                               </span>
                             </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur.</p>
+                            <p className="font-sm color-text-paragraph mt-10">
+                              企業動画・採用動画・プロモーション動画の企画立案を行うポジションです。
+                            </p>
                             <div className="card-2-bottom mt-20">
                               <div className="row">
                                 <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$800</span>
-                                  <span className="text-muted">/Hour</span>
+                                  <span className="card-text-price">年収400万円</span>
+                                  <span className="text-muted">〜</span>
                                 </div>
                                 <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
+                                  <div
+                                    className="btn btn-apply-now"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#ModalApplyJobForm"
+                                  >
+                                    応募する
                                   </div>
                                 </div>
                               </div>
@@ -727,58 +609,65 @@ export default function JobList() {
                           </div>
                         </div>
                       </div>
+
                       <div className="col-xl-12 col-12">
                         <div className="card-grid-2 hover-up">
                           <span className="flash" />
                           <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
+                            <div className="col-lg-7 col-md-7 col-sm-12">
                               <div className="card-grid-2-image-left">
                                 <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-7.png" alt="jobBox" />
+                                  <img src="assets/imgs/brands/brand-7.png" alt="求人企業ロゴ" />
                                 </div>
                                 <div className="right-info">
                                   <Link href="#">
                                     <span className="name-job">Nintendo</span>
                                   </Link>
-                                  <span className="location-small">New York, US</span>
+                                  <span className="location-small">愛知県名古屋市</span>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
+                            <div className="col-lg-5 text-start text-md-end pr-30 col-md-5 col-sm-12">
                               <div className="pl-15 mb-15 mt-30">
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
+                                  <span className="btn btn-grey-small mr-5">YouTube</span>
                                 </Link>
-
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
+                                  <span className="btn btn-grey-small mr-5">サムネイル</span>
                                 </Link>
                               </div>
                             </div>
                           </div>
+
                           <div className="card-block-info">
                             <h4>
-                              <Link href="/job-details">
-                                <span>Products Manager</span>
+                              <Link href="#">
+                                <span>YouTube動画編集者</span>
                               </Link>
                             </h4>
                             <div className="mt-5">
-                              <span className="card-briefcase">Full time</span>
+                              <span className="card-briefcase">業務委託</span>
                               <span className="card-time">
-                                <span>6</span>
-                                <span> mins ago</span>
+                                <span>12</span>
+                                <span>分前</span>
                               </span>
                             </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur.</p>
+                            <p className="font-sm color-text-paragraph mt-10">
+                              YouTubeチャンネル運用に伴う動画編集、テロップ、簡単なサムネイル制作を行います。
+                            </p>
                             <div className="card-2-bottom mt-20">
                               <div className="row">
                                 <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$250</span>
-                                  <span className="text-muted">/Hour</span>
+                                  <span className="card-text-price">1本15,000円</span>
+                                  <span className="text-muted">〜</span>
                                 </div>
                                 <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
+                                  <div
+                                    className="btn btn-apply-now"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#ModalApplyJobForm"
+                                  >
+                                    応募する
                                   </div>
                                 </div>
                               </div>
@@ -786,58 +675,65 @@ export default function JobList() {
                           </div>
                         </div>
                       </div>
+
                       <div className="col-xl-12 col-12">
                         <div className="card-grid-2 hover-up">
                           <span className="flash" />
                           <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
+                            <div className="col-lg-7 col-md-7 col-sm-12">
                               <div className="card-grid-2-image-left">
                                 <div className="image-box">
-                                  <img src="assets/imgs/brands/brand-8.png" alt="jobBox" />
+                                  <img src="assets/imgs/brands/brand-8.png" alt="求人企業ロゴ" />
                                 </div>
                                 <div className="right-info">
                                   <Link href="#">
                                     <span className="name-job">Periscope</span>
                                   </Link>
-                                  <span className="location-small">New York, US</span>
+                                  <span className="location-small">リモート</span>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-lg-6 text-start text-md-end pr-60 col-md-6 col-sm-12">
+                            <div className="col-lg-5 text-start text-md-end pr-30 col-md-5 col-sm-12">
                               <div className="pl-15 mb-15 mt-30">
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Adobe XD</span>
+                                  <span className="btn btn-grey-small mr-5">ディレクション</span>
                                 </Link>
-
                                 <Link href="#">
-                                  <span className="btn btn-grey-small mr-5">Figma</span>
+                                  <span className="btn btn-grey-small mr-5">進行管理</span>
                                 </Link>
                               </div>
                             </div>
                           </div>
+
                           <div className="card-block-info">
                             <h4>
-                              <Link href="/job-details">
-                                <span>Lead Quality Control QA</span>
+                              <Link href="#">
+                                <span>動画制作ディレクター</span>
                               </Link>
                             </h4>
                             <div className="mt-5">
-                              <span className="card-briefcase">Full time</span>
+                              <span className="card-briefcase">正社員</span>
                               <span className="card-time">
-                                <span>6</span>
-                                <span> mins ago</span>
+                                <span>15</span>
+                                <span>分前</span>
                               </span>
                             </div>
-                            <p className="font-sm color-text-paragraph mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae architecto eveniet, dolor quo repellendus pariatur.</p>
+                            <p className="font-sm color-text-paragraph mt-10">
+                              クライアント対応、制作進行、品質管理まで幅広く担当するディレクターポジションです。
+                            </p>
                             <div className="card-2-bottom mt-20">
                               <div className="row">
                                 <div className="col-lg-7 col-7">
-                                  <span className="card-text-price">$250</span>
-                                  <span className="text-muted">/Hour</span>
+                                  <span className="card-text-price">年収550万円</span>
+                                  <span className="text-muted">〜</span>
                                 </div>
                                 <div className="col-lg-5 col-5 text-end">
-                                  <div className="btn btn-apply-now" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
-                                    Apply now
+                                  <div
+                                    className="btn btn-apply-now"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#ModalApplyJobForm"
+                                  >
+                                    応募する
                                   </div>
                                 </div>
                               </div>
@@ -846,439 +742,150 @@ export default function JobList() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="paginations">
-                    <ul className="pager">
-                      <li>
-                        <a className="pager-prev" href="#" />
-                      </li>
-                      <li>
-                        <Link href="#">
-                          <span className="pager-number">1</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#">
-                          <span className="pager-number">2</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#">
-                          <span className="pager-number">3</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#">
-                          <span className="pager-number">4</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#">
-                          <span className="pager-number">5</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#">
-                          <span className="pager-number active">6</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="#">
-                          <span className="pager-number">7</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <a className="pager-next" href="#" />
-                      </li>
-                    </ul>
+
+                    <div className="paginations">
+                      <ul className="pager">
+                        <li>
+                          <a className="pager-prev" href="#" />
+                        </li>
+                        <li>
+                          <Link href="#">
+                            <span className="pager-number">1</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="#">
+                            <span className="pager-number">2</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="#">
+                            <span className="pager-number">3</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="#">
+                            <span className="pager-number">4</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="#">
+                            <span className="pager-number">5</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="#">
+                            <span className="pager-number active">6</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="#">
+                            <span className="pager-number">7</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <a className="pager-next" href="#" />
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-                <div className="col-lg-3 col-md-12 col-sm-12 col-12">
-                  <div className="sidebar-shadow none-shadow mb-30">
-                    <div className="sidebar-filters">
-                      <div className="filter-block head-border mb-30">
-                        <h5>
-                          Advance Filter
-                          <Link href="#">
-                            <span className="link-reset">Reset</span>
-                          </Link>
-                        </h5>
-                      </div>
-                      <div className="filter-block mb-30">
-                        <div className="form-group select-style select-style-icon">
-                          <select className="form-control form-icons select-active">
-                            <option>New York, US</option>
-                            <option>London</option>
-                            <option>Paris</option>
-                            <option>Berlin</option>
-                          </select>
-                          <i className="fi-rr-marker" />
-                        </div>
-                      </div>
-                      <div className="filter-block mb-20">
-                        <h5 className="medium-heading mb-15">Industry</h5>
-                        <div className="form-group">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">All</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">180</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Software</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">12</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Finance</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">23</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Recruting</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">43</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Management</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">65</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Advertising</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">76</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="filter-block mb-20">
-                        <h5 className="medium-heading mb-25">Salary Range</h5>
-                        <div className="list-checkbox pb-20">
-                          <div className="row position-relative mt-10 mb-20">
-                            <div className="col-sm-12 box-slider-range">
-                              <div id="slider-range" />
-                            </div>
-                            <div className="box-input-money">
-                              <input className="input-disabled form-control min-value-money" type="text" name="min-value-money" disabled={true} defaultValue="" />
-                              <input className="form-control min-value" type="hidden" name="min-value" defaultValue="" />
-                            </div>
-                          </div>
-                          <div className="box-number-money">
-                            <div className="row mt-30">
-                              <div className="col-sm-6 col-6">
-                                <span className="font-sm color-brand-1">$0</span>
-                              </div>
-                              <div className="col-sm-6 col-6 text-end">
-                                <span className="font-sm color-brand-1">$500</span>
-                              </div>
-                            </div>
+
+                {/* 右：求人詳細 */}
+                <div className="col-lg-7 col-md-12 col-sm-12 col-12">
+                  <div className="sidebar-shadow none-shadow mb-30" style={{ height: "100%" }}>
+                    <div className="p-4 p-md-5">
+                      <div className="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-25">
+                        <div>
+                          <h3 className="mb-10">シニア フルスタックエンジニア</h3>
+                          <div className="d-flex flex-wrap align-items-center gap-3">
+                            <span className="card-briefcase">正社員</span>
+                            <span className="card-time">
+                              <span>3</span>
+                              <span>分前</span>
+                            </span>
                           </div>
                         </div>
-                        <div className="form-group mb-20">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">All</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">145</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">$0k - $20k</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">56</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">$20k - $40k</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">37</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">$40k - $60k</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">75</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">$60k - $80k</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">98</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">$80k - $100k</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">14</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">$100k - $200k</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">25</span>
-                            </li>
-                          </ul>
+                        <div>
+                          <div
+                            className="btn btn-apply-now"
+                            data-bs-toggle="modal"
+                            data-bs-target="#ModalApplyJobForm"
+                          >
+                            応募する
+                          </div>
                         </div>
                       </div>
-                      <div className="filter-block mb-30">
-                        <h5 className="medium-heading mb-10">Popular Keyword</h5>
-                        <div className="form-group">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">Software</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">24</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Developer</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">45</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Web</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">57</span>
-                            </li>
-                          </ul>
+
+                      <div className="sidebar-shadow mb-30">
+                        <div className="p-4">
+                          <h5 className="medium-heading mb-20">雇用情報</h5>
+
+                          <div className="mb-15 d-flex">
+                            <div style={{ minWidth: "110px" }} className="color-text-paragraph-2">
+                              業界
+                            </div>
+                            <div>機械 / 自動車 / 建設</div>
+                          </div>
+
+                          <div className="mb-15 d-flex">
+                            <div style={{ minWidth: "110px" }} className="color-text-paragraph-2">
+                              給与
+                            </div>
+                            <div>年収800万円〜1000万円</div>
+                          </div>
+
+                          <div className="mb-15 d-flex">
+                            <div style={{ minWidth: "110px" }} className="color-text-paragraph-2">
+                              雇用形態
+                            </div>
+                            <div>正社員</div>
+                          </div>
+
+                          <div className="d-flex">
+                            <div style={{ minWidth: "110px" }} className="color-text-paragraph-2">
+                              更新日
+                            </div>
+                            <div>2026/03/11</div>
+                          </div>
                         </div>
                       </div>
-                      <div className="filter-block mb-30">
-                        <h5 className="medium-heading mb-10">Position</h5>
-                        <div className="form-group">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Senior</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">12</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">Junior</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">35</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Fresher</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">56</span>
-                            </li>
-                          </ul>
-                        </div>
+
+                      <div className="mb-30">
+                        <h4 className="mb-15">仕事内容</h4>
+                        <p className="font-md color-text-paragraph mb-15">
+                          デジタルプロダクトの設計・開発・改善を推進するポジションです。プロダクトチームと連携しながら、ユーザー体験の向上に向けた機能開発を行っていただきます。
+                        </p>
+                        <p className="font-md color-text-paragraph">
+                          フロントエンドからバックエンドまで幅広く関わり、仕様策定、実装、運用改善まで一貫して担当していただきます。
+                        </p>
                       </div>
-                      <div className="filter-block mb-30">
-                        <h5 className="medium-heading mb-10">Experience Level</h5>
-                        <div className="form-group">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Internship</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">56</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Entry Level</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">87</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">Associate</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">24</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Mid Level</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">45</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Director</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">76</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Executive</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">89</span>
-                            </li>
-                          </ul>
-                        </div>
+
+                      <div className="mb-30">
+                        <h4 className="mb-15">必須スキル</h4>
+                        <ul className="list-dot">
+                          <li className="mb-10">エンドツーエンドの開発経験</li>
+                          <li className="mb-10">インタラクティブなサービス設計の実務経験</li>
+                          <li className="mb-10">チームでのコミュニケーション能力</li>
+                          <li className="mb-10">プロトタイプやモックの作成経験</li>
+                          <li className="mb-10">タスクの見積もりと優先順位付けの経験</li>
+                          <li className="mb-10">デジタルプロダクト開発の実務経験</li>
+                          <li className="mb-10">デザインまたは関連分野の知識</li>
+                          <li className="mb-10">Figma / Photoshop / Illustrator 等の使用経験</li>
+                        </ul>
                       </div>
-                      <div className="filter-block mb-30">
-                        <h5 className="medium-heading mb-10">Onsite/Remote</h5>
-                        <div className="form-group">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">On-site</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">12</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">Remote</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">65</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Hybrid</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">58</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="filter-block mb-30">
-                        <h5 className="medium-heading mb-10">Job Posted</h5>
-                        <div className="form-group">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">All</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">78</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">1 day</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">65</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">7 days</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">24</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">30 days</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">56</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="filter-block mb-20">
-                        <h5 className="medium-heading mb-15">Job type</h5>
-                        <div className="form-group">
-                          <ul className="list-checkbox">
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Full Time</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">25</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" defaultChecked={true} />
-                                <span className="text-small">Part Time</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">64</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Remote Jobs</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">78</span>
-                            </li>
-                            <li>
-                              <label className="cb-container">
-                                <input type="checkbox" />
-                                <span className="text-small">Freelancer</span>
-                                <span className="checkmark" />
-                              </label>
-                              <span className="number-item">97</span>
-                            </li>
-                          </ul>
-                        </div>
+
+                      <div className="mb-0">
+                        <h4 className="mb-15">歓迎する人物像</h4>
+                        <p className="font-md color-text-paragraph mb-15">
+                          プロダクト理解を深めながら、ユーザーとビジネスの両面に価値を出せる方を歓迎します。
+                        </p>
+                        <p className="font-md color-text-paragraph mb-15">
+                          課題発見から改善提案まで主体的に取り組み、チームと連携しながら開発を前に進められる方に向いています。
+                        </p>
+                        <p className="font-md color-text-paragraph">
+                          複雑な内容をわかりやすく整理し、関係者と円滑にコミュニケーションできる方を求めています。
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -1286,11 +893,16 @@ export default function JobList() {
               </div>
             </div>
           </section>
+
           <section className="section-box mt-50 mb-50">
             <div className="container">
               <div className="text-start">
-                <h2 className="section-title mb-10 wow animate__animated animate__fadeInUp">News and Blog</h2>
-                <p className="font-lg color-text-paragraph-2 wow animate__animated animate__fadeInUp">Get the latest news, updates and tips</p>
+                <h2 className="section-title mb-10 wow animate__animated animate__fadeInUp">
+                  お知らせ・ブログ
+                </h2>
+                <p className="font-lg color-text-paragraph-2 wow animate__animated animate__fadeInUp">
+                  最新情報やお役立ち情報をお届けします
+                </p>
               </div>
             </div>
             <div className="container">
@@ -1300,33 +912,43 @@ export default function JobList() {
                 </div>
                 <div className="text-center">
                   <Link href="blog-grid">
-                    <span className="btn btn-brand-1 btn-icon-load mt--30 hover-up">Load More Posts</span>
+                    <span className="btn btn-brand-1 btn-icon-load mt--30 hover-up">
+                      もっと見る
+                    </span>
                   </Link>
                 </div>
               </div>
             </div>
           </section>
+
           <section className="section-box mt-50 mb-20">
             <div className="container">
               <div className="box-newsletter">
                 <div className="row">
                   <div className="col-xl-3 col-12 text-center d-none d-xl-block">
-                    <img src="assets/imgs/template/newsletter-left.png" alt="joxBox" />
+                    <img src="assets/imgs/template/newsletter-left.png" alt="newsletter" />
                   </div>
                   <div className="col-lg-12 col-xl-6 col-12">
                     <h2 className="text-md-newsletter text-center">
-                      New Things Will Always
-                      <br /> Update Regularly
+                      新着求人や最新情報を
+                      <br />
+                      定期的にお届けします
                     </h2>
                     <div className="box-form-newsletter mt-40">
                       <form className="form-newsletter">
-                        <input className="input-newsletter" type="text" placeholder="Enter your email here" />
-                        <button className="btn btn-default font-heading icon-send-letter">Subscribe</button>
+                        <input
+                          className="input-newsletter"
+                          type="text"
+                          placeholder="メールアドレスを入力"
+                        />
+                        <button className="btn btn-default font-heading icon-send-letter">
+                          登録する
+                        </button>
                       </form>
                     </div>
                   </div>
                   <div className="col-xl-3 col-12 text-center d-none d-xl-block">
-                    <img src="assets/imgs/template/newsletter-right.png" alt="joxBox" />
+                    <img src="assets/imgs/template/newsletter-right.png" alt="newsletter" />
                   </div>
                 </div>
               </div>

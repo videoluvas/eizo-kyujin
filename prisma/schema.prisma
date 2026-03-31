@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Job {
+  id        Int       @id @default(autoincrement())
+  url       String    @unique @db.Text
+  title     String    @db.Text
+  company   String    @db.Text
+  jt        String?   @db.Text
+  st        String?   @db.Text
+  area      String?   @db.Text
+  snippet   String?   @db.Text
+  update    DateTime?
+  tracking  String?   @db.Text
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("jobs")
+}
+
+model AreaCompany {
+  companyCd    Int      @id @map("company_cd")
+  rrCd         Int?     @map("rr_cd")
+  companyName  String?  @map("company_name") @db.Text
+  companyNameK String?  @map("company_name_k") @db.Text
+  companyNameH String?  @map("company_name_h") @db.Text
+  companyNameR String?  @map("company_name_r") @db.Text
+  companyUrl   String?  @map("company_url") @db.Text
+  companyType  Int?     @map("company_type")
+  eStatus      Int?     @map("e_status")
+  eSort        Int?     @map("e_sort")
+
+  lines AreaLine[]
+
+  @@map("area_companies")
+}
+
+model AreaLine {
+  lineCd     Int      @id @map("line_cd")
+  companyCd  Int?     @map("company_cd")
+  lineName   String?  @map("line_name") @db.Text
+  lineNameK  String?  @map("line_name_k") @db.Text
+  lineNameH  String?  @map("line_name_h") @db.Text
+  lineColorC String?  @map("line_color_c") @db.Text
+  lineColorT String?  @map("line_color_t") @db.Text
+  lineType   Int?     @map("line_type")
+  lon        Float?
+  lat        Float?
+  zoom       Int?
+  eStatus    Int?     @map("e_status")
+  eSort      Int?     @map("e_sort")
+
+  company  AreaCompany? @relation(fields: [companyCd], references: [companyCd])
+  stations AreaStation[]
+  joins    AreaJoin[]
+
+  @@index([companyCd])
+  @@map("area_lines")
+}
+
+model AreaStation {
+  stationCd    Int      @id @map("station_cd")
+  stationGCd   Int?     @map("station_g_cd")
+  stationName  String?  @map("station_name") @db.Text
+  stationNameK String?  @map("station_name_k") @db.Text
+  stationNameR String?  @map("station_name_r") @db.Text
+  lineCd       Int?     @map("line_cd")
+  prefCd       Int?     @map("pref_cd")
+  post         String?  @db.Text
+  address      String?  @db.Text
+  lon          Float?
+  lat          Float?
+  openYmd      String?  @map("open_ymd") @db.Text
+  closeYmd     String?  @map("close_ymd") @db.Text
+  eStatus      Int?     @map("e_status")
+  eSort        Int?     @map("e_sort")
+
+  line AreaLine? @relation(fields: [lineCd], references: [lineCd])
+
+  @@index([lineCd])
+  @@index([prefCd])
+  @@index([stationName])
+  @@map("area_stations")
+}
+
+model AreaJoin {
+  lineCd     Int @map("line_cd")
+  stationCd1 Int @map("station_cd1")
+  stationCd2 Int @map("station_cd2")
+
+  line AreaLine @relation(fields: [lineCd], references: [lineCd])
+
+  @@id([lineCd, stationCd1, stationCd2])
+  @@index([stationCd1])
+  @@index([stationCd2])
+  @@map("area_join")
+}
+
+model AreaMunicipality {
+  municipalityCd        Int     @id @map("municipality_cd")
+  municipalityName      String? @map("municipality_name") @db.Text
+  municipalityNameKana  String? @map("municipality_name_kana") @db.Text
+  municipalityNameRomaji String? @map("municipality_name_romaji") @db.Text
+  prefCd                Int?    @map("pref_cd")
+  prefectureName        String? @map("prefecture_name") @db.Text
+  prefectureNameKana    String? @map("prefecture_name_kana") @db.Text
+  prefectureNameRomaji  String? @map("prefecture_name_romaji") @db.Text
+
+  @@index([prefCd])
+  @@index([municipalityName])
+  @@map("area_municipalities")
+}
+
+model AreaPrefecture {
+  prefCd               Int     @id @map("pref_cd")
+  prefectureName       String? @map("prefecture_name") @db.Text
+  prefectureNameKana   String? @map("prefecture_name_kana") @db.Text
+  prefectureNameRomaji String? @map("prefecture_name_romaji") @db.Text
+  regionCd             Int?    @map("region_cd")
+
+  @@index([regionCd])
+  @@map("area_prefectures")
+}
+
+model AreaRegion {
+  regionCd   Int     @id @map("region_cd")
+  regionName String? @map("region_name") @db.Text
+
+  @@map("area_regions")
+}
