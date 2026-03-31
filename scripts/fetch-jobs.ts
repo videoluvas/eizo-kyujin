@@ -10,21 +10,45 @@ const API_KEY = process.env.KYUJIN_BOX_API_KEY!;
 const PUBLISHER_ID = process.env.KYUJIN_BOX_PUBLISHER_ID!;
 const DOMAIN = process.env.KYUJIN_BOX_DOMAIN!;
 
+function assignCategories(
+  title: string,
+  snippet: string,
+  categories: { name: string; keywords: string }[]
+): string[] {
+  const text = title + " " + (snippet ?? "");
+  const matched: string[] = [];
+
+  for (const cat of categories) {
+    const keywords = cat.keywords.split(",").map((k) => k.trim());
+    for (const kw of keywords) {
+      if (kw && text.includes(kw)) {
+        matched.push(cat.name);
+        break;
+      }
+    }
+  }
+
+  return matched;
+}
+
 async function fetchJobs() {
-  const keywords = await prisma.searchKeyword.findMany({
+  const searchKeywords = await prisma.searchKeyword.findMany({
     where: { isActive: true },
     orderBy: { id: "asc" },
   });
 
-  if (keywords.length === 0) {
+  if (searchKeywords.length === 0) {
     console.log("キーワードがありません");
     await prisma.$disconnect();
     return;
   }
 
+  // カテゴリをDBから取得
+  const categories = await prisma.category.findMany();
+
   // 今の分数でキーワードをローテーション
   const minute = new Date().getMinutes();
-  const target = keywords[minute % keywords.length];
+  const target = searchKeywords[minute % searchKeywords.length];
 
   const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
   url.searchParams.set("key", API_KEY);
@@ -49,6 +73,17 @@ async function fetchJobs() {
 
   // 取得した求人を保存
   for (const job of data.results) {
+    // 既存のcategoryを確認
+    const existing = await prisma.job.findUnique({
+      where: { url: job.url },
+      select: { category: true },
+    });
+
+    const category =
+      existing && existing.category.length > 0
+        ? existing.category
+        : assignCategories(job.title, job.snippet ?? "", categories);
+
     await prisma.job.upsert({
       where: { url: job.url },
       update: {
@@ -71,6 +106,7 @@ async function fetchJobs() {
         snippet: job.snippet,
         update: job.update ? new Date(job.update) : null,
         tracking: job.tracking,
+        category,
       },
     });
   }

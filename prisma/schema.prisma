@@ -21,10 +21,20 @@ model Job {
   snippet   String?   @db.Text
   update    DateTime?
   tracking  String?   @db.Text
+  category  String[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
   @@map("jobs")
+}
+
+model Category {
+  nameEn String @id @map("name_en") @db.Text
+  group  String @db.Text
+  name   String @unique @db.Text
+  keywords String @default("") @db.Text
+
+  @@map("categories")
 }
 
 model SearchKeyword {
