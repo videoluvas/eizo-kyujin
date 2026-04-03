@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     index: process.env.NEXT_PUBLIC_SITE_URL === "https://eizo-job.com",
     follow: process.env.NEXT_PUBLIC_SITE_URL === "https://eizo-job.com",
   },
+  verification: {
+    google: "6uWx5F46tdFAmlnDwkzjScZZmVp0pjyMx1hJY51QQ5k",
+  },
   icons: {
     icon: [
       { url: "https://pub-647b9765a3c242dcac081e185c116796.r2.dev/favicon_io/favicon-16x16.png", sizes: "16x16" },
