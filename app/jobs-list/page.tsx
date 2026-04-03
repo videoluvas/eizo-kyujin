@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     workStyle?: string;
     area?: string;
     category?: string;
@@ -36,11 +36,11 @@ type Props = {
     sort?: string;
     perPage?: string;
     page?: string;
-  };
+  }>;
 };
 
 export default async function JobList({ searchParams }: Props) {
-  const { workStyle, area, category, kw } = searchParams;
+  const { workStyle, area, category, kw } = await searchParams;
 
 const categoryList = category
   ? Array.isArray(category)
