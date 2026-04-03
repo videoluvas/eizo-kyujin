@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/public/assets/css/style.css";
 import "@/styles/globals.css";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -31,6 +32,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-Z6QCQ3YKPM"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-Z6QCQ3YKPM');
+          `}
+        </Script>
+      </head>
       <body className={`${plusJakartaSans.className}`}>{children}</body>
     </html>
   );
