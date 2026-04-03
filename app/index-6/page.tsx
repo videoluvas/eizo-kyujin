@@ -3,7 +3,7 @@ import Link from "next/link";
 import Layout from "@/components/Layout/Layout";
 import CategoryTab2 from "@/components/elements/CategoryTab2";
 import BlogSlider from "@/components/sliders/Blog";
-import CategorySlider from "@/components/sliders/Category";
+import CategorySlider from "@/components/sliders/CategorySlider";
 import TestimonialSlider1 from "@/components/sliders/Testimonial1";
 
 export default function Index6() {

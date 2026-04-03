@@ -4,7 +4,7 @@ import Layout from "@/components/Layout/Layout";
 import CategoryTab2 from "@/components/elements/CategoryTab2";
 import BlogSlider from "@/components/sliders/Blog";
 import BrandSlider2 from "@/components/sliders/Brand2";
-import CategorySlider from "@/components/sliders/Category";
+import CategorySlider from "@/components/sliders/CategorySlider";
 import CategorySlider2 from "@/components/sliders/Category2";
 import TestimonialSlider1 from "@/components/sliders/Testimonial1";
 

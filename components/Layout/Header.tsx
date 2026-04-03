@@ -1,6 +1,7 @@
 ﻿/* eslint-disable @next/next/no-html-link-for-pages */
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   handleOpen: () => void;
@@ -10,6 +11,8 @@ interface HeaderProps {
 
 const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
   const [scroll, setScroll] = useState(false);
+  const pathname = usePathname();
+  const isTop = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => {
@@ -23,14 +26,18 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
 
   return (
     <>
-      <header className={scroll ? "header sticky-bar stick" : "header sticky-bar"}>
+      <header className={scroll && !isTop ? "header sticky-bar stick" : "header sticky-bar"}>
         <div className="container">
           <div className="main-header">
             <div className="header-left">
               <div className="header-logo">
                 <Link href="/">
                   <span className="d-flex">
-                    <img alt="jobBox" src="assets/imgs/template/jobhub-logo.svg" />
+<img 
+  alt="映像求人PROポータル" 
+  src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/eizo-job-logo%20(2).png"
+  style={{ height: "80px", width: "auto", objectFit: "contain" }}
+/>
                   </span>
                 </Link>
               </div>
@@ -45,8 +52,8 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/page-about">
-                      <span>このサイトについて</span>
+                      <Link href="https://www.luvas.red/">
+                        <span>運営会社</span>
                     </Link>
                   </li>
                 </ul>
@@ -96,8 +103,8 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
                       </Link>
                     </li>
                     <li>
-                      <Link href="/page-about">
-                        <span>このサイトについて</span>
+                      <Link href="https://www.luvas.red/">
+                        <span>運営会社</span>
                       </Link>
                     </li>
                   </ul>

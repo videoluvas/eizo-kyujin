@@ -2,14 +2,16 @@
   "name": "jobbox-app",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "sass": "sass --watch public/assets/scss/style.scss:public/assets/css/style.css"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "sass": "sass --watch public/assets/scss/style.scss:public/assets/css/style.css",
+  "seed:seo": "tsx scripts/seed-seo.ts"
+},
   "dependencies": {
+    "@iconify/react": "^6.0.2",
     "@prisma/adapter-pg": "^7.6.0",
     "@prisma/client": "^7.5.0",
     "dotenv": "^17.3.1",

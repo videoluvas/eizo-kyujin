@@ -588,7 +588,7 @@ h4 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 30px;
   color: #05264e;
 }
@@ -2221,10 +2221,10 @@ label {
 }
 
 .card-grid-2 .card-grid-2-image-left .right-info .name-job {
-  font-size: 18px;
+  font-size: 14px;
   line-height: 26px;
-  color: #05264e;
-  font-weight: bold;
+  color:#a0abb8;
+  font-weight: 500;
   display: block;
 }
 
@@ -7870,14 +7870,18 @@ ul li:last-child .card-list-4 {
 
 .box-image-job .img-job-1 {
   position: absolute;
-  top: -70px;
+  top: -110px;
   left: -120px;
+  transform: scale(0.5);
+  opacity: 0.7;
 }
 
 .box-image-job .img-job-2 {
   position: absolute;
   bottom: -170px;
-  right: -80px;
+  right: -110px;
+    transform: scale(0.5);
+  opacity: 0.7;
 }
 
 .overflow-visible {

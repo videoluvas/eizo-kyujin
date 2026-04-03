@@ -8,10 +8,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Jobbox - Job Portal HTML Template",
-  description: "Jobbox - Job Portal HTML Template",
+  robots: {
+    index: process.env.NEXT_PUBLIC_SITE_URL === "https://eizo-job.com",
+    follow: process.env.NEXT_PUBLIC_SITE_URL === "https://eizo-job.com",
+  },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: "https://pub-647b9765a3c242dcac081e185c116796.r2.dev/favicon_io/favicon-16x16.png", sizes: "16x16" },
+      { url: "https://pub-647b9765a3c242dcac081e185c116796.r2.dev/favicon_io/favicon-32x32.png", sizes: "32x32" },
+    ],
+    apple: "https://pub-647b9765a3c242dcac081e185c116796.r2.dev/favicon_io/apple-touch-icon.png",
   },
 };
 
@@ -21,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={`${plusJakartaSans.className}`}>{children}</body>
     </html>
   );

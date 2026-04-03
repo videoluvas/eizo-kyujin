@@ -12,13 +12,14 @@ const Footer = () => {
           <div className="footer-col-1 col-md-4 col-sm-12">
             <Link href="/">
               <span>
-                <img alt="logo" src="/assets/imgs/template/jobhub-logo.svg" />
+                  <img alt="映像求人PROポータル" src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/eizo-job-logo%20(2).png" />
               </span>
             </Link>
 
             <div className="mt-20 mb-20 font-xs color-text-paragraph-2">
-              映像クリエイター向け求人スカウトサービス。  
-              動画制作会社や企業から、あなたの作品に直接オファーが届きます。
+             映像業界・動画制作に特化した転職求人検索サービス。
+プロの動画制作会社が運営し、現場目線で厳選した求人を掲載。
+大手求人ポータルとの提携により、圧倒的な求人数から最適な転職先を見つけることができます。
             </div>
           </div>
 
@@ -31,9 +32,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link href="/jobs-list">求人一覧</Link>
-              </li>
-              <li>
-                <Link href="/terms">利用規約 & プライバシー</Link>
               </li>
               <li>
                 <a href="https://luvas.red" target="_blank">
