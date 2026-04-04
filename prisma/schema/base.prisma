@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  output   = "../../app/generated/prisma"
 }
 
 datasource db {
@@ -29,12 +29,12 @@ model Job {
 }
 
 model Category {
-  nameEn String @id @map("name_en") @db.Text
-  group  String @db.Text
-  name   String @unique @db.Text
+  nameEn   String @id @map("name_en") @db.Text
+  group    String @db.Text
+  name     String @unique @db.Text
   keywords String @default("") @db.Text
   order    Int    @default(0)
-  icon     String @default("")  
+  icon     String @default("")
 
   @@map("categories")
 }
@@ -63,7 +63,7 @@ model WorkStyle {
 model Area {
   id        Int      @id @default(autoincrement())
   name      String   @unique @db.Text
-  order    Int    @default(0)  
+  order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   imgUrl    String   @default("")
@@ -79,5 +79,6 @@ model SeoSetting {
   ogTitle       String @default("") @db.Text
   ogDescription String @default("") @db.Text
   ogImage       String @default("") @db.Text
+
   @@map("seo_settings")
 }
