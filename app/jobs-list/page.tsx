@@ -85,14 +85,20 @@ const categoryList = category
   return (
     <>
       <Layout>
+        {/* SEO用h1 */}
+<div style={{ padding: "8px 0 0 192px" }}>
+  <h1 className="font-xs color-text-paragraph-2" style={{ fontSize: "12px", fontWeight: "400", lineHeight: "18px" }}>
+    映像業界・動画制作の転職求人検索｜未経験・編集・ディレクター案件掲載
+  </h1>
+</div>
         <div>
           <section className="section-box-2">
             <div className="container">
               <div className="banner-hero banner-single banner-single-bg">
                 <div className="block-banner text-center">
-                  <h3 className="wow animate__animated animate__fadeInUp">
+                  <h2 className="wow animate__animated animate__fadeInUp">
                     映像業界の転職求人を検索
-                  </h3>
+                  </h2>
                   <div className="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                     映像制作者・動画クリエイター向けの転職求人を掲載中。
                     <br className="d-none d-xl-block" />

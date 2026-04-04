@@ -30,9 +30,6 @@ export default function JobCard({ job, layout = "grid3" }: Props) {
       <div className="row">
         <div className={isGrid ? "col-12" : "col-lg-8 col-md-8 col-sm-12"}>
           <div className="card-grid-2-image-left">
-            <div className="image-box">
-              <img src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/dummy-work.png" alt="企業ロゴ" style={{ width: "52px", height: "52px", objectFit: "cover", borderRadius: "8px" }} />
-            </div>
             <div className="right-info">
               <a href={job.url} target="_blank" rel="noopener">
   <span className="name-job" style={{
@@ -40,7 +37,9 @@ export default function JobCard({ job, layout = "grid3" }: Props) {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
-    maxWidth: "200px"
+    maxWidth: "200px",
+        color: "#3B64F4",
+    fontWeight: "600"
   }}>{job.company}</span>
 </a>
               <span className="location-small">{job.area}</span>

@@ -159,10 +159,10 @@ export default async function Home() {
             </div>
             <div className="col-lg-6 col-sm-12">
               <div className="content-job-inner">
-                <span className="color-text-mutted text-32">映像クリエイターのための転職求人プラットフォーム</span>
-                <h2 className="text-52 wow animate__animated animate__fadeInUp">
-                  <span className="color-brand-2">プロの動画制作会社</span>が運営。
-                </h2>
+<span className="color-text-mutted" style={{ fontSize: "20px", fontWeight: "700" }}>映像クリエイターのための転職求人プラットフォーム</span>
+<h2 className="wow animate__animated animate__fadeInUp" style={{ fontSize: "42px", fontWeight: "700" }}>
+  <span className="color-brand-2">プロの動画制作会社</span>が運営
+</h2>
                 <div className="mt-40 pr-50 text-md-lh28 wow animate__animated animate__fadeInUp">
                  現場を知るクリエイター目線で、実態に即した求人情報を掲載しています。
 

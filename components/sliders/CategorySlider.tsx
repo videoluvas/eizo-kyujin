@@ -71,7 +71,7 @@ const handleClick = (categoryNames: string[]) => {
                   <img alt={item.group} src={item.config.icon} />
                 </div>
                 <div className="text-info-right">
-                  <h3>{item.config.label}</h3>
+                  <h3 style={{ fontSize: "18px" }}>{item.config.label}</h3>
                   <p className="font-xs" style={{ color: "#a0aec0" }}>
                     {item.categoryNames.length}カテゴリ
                   </p>
