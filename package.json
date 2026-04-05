@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "sass": "sass --watch public/assets/scss/style.scss:public/assets/css/style.css",
     "seed:seo": "tsx scripts/seed-seo.ts"
   },
@@ -16,7 +16,7 @@
     "@prisma/client": "^7.5.0",
     "dotenv": "^17.4.0",
     "lucide-react": "^0.577.0",
-    "next": "15.3.3",
+    "next": "^16.2.2",
     "prisma": "^7.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -30,7 +30,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.3",
+    "eslint-config-next": "^16.2.2",
     "tsx": "^4.21.0",
     "typescript": "^5"
   }
