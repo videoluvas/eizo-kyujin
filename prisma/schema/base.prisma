@@ -12,7 +12,7 @@ datasource db {
 
 model Job {
   id          Int       @id @default(autoincrement())
-  url         String    @unique @db.Text
+  url         String    @db.Text
   title       String    @db.Text
   company     String    @db.Text
   jt          String?   @db.Text
@@ -29,6 +29,7 @@ model Job {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
+  @@unique([title, company])
   @@map("jobs")
 }
 

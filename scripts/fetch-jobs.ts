@@ -85,8 +85,16 @@ async function fetchJobs() {
     let updatedCount = 0;
 
     for (const job of data.results) {
+      const titleKey = job.title ?? "";
+      const companyKey = job.company ?? "";
+
       const existing = await prisma.job.findUnique({
-        where: { url: job.url },
+        where: {
+          title_company: {
+            title: titleKey,
+            company: companyKey,
+          },
+        },
         select: {
           id: true,
           category: true,
@@ -99,22 +107,26 @@ async function fetchJobs() {
           : assignCategories(job.title ?? "", job.snippet ?? "", categories);
 
       await prisma.job.upsert({
-        where: { url: job.url },
+        where: {
+          title_company: {
+            title: titleKey,
+            company: companyKey,
+          },
+        },
         update: {
-          title: job.title ?? "",
-          company: job.company ?? "",
+          url: job.url,           // URLは毎回更新
+          tracking: job.tracking ?? null,  // トラッキングも更新
           jt: job.jt ?? null,
           st: job.st ?? null,
           area: job.area ?? null,
           snippet: job.snippet ?? null,
           update: job.update ? new Date(job.update) : null,
-          tracking: job.tracking ?? null,
           lastSeenAt: now,
         },
         create: {
           url: job.url,
-          title: job.title ?? "",
-          company: job.company ?? "",
+          title: titleKey,
+          company: companyKey,
           jt: job.jt ?? null,
           st: job.st ?? null,
           area: job.area ?? null,
