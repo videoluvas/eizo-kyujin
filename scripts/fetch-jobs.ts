@@ -55,6 +55,10 @@ async function fetchJobs() {
     const minute = now.getMinutes();
     const target = searchKeywords[minute % searchKeywords.length];
 
+    // currentStartを使って順番に取得
+    const currentStart = target.currentStart || 1;
+    const nextStart = currentStart + 50 > 950 ? 1 : currentStart + 50;
+
     const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
     url.searchParams.set("key", API_KEY);
     url.searchParams.set("publisher", PUBLISHER_ID);
@@ -62,7 +66,7 @@ async function fetchJobs() {
     url.searchParams.set("format", "json");
     url.searchParams.set("kw", target.keyword);
     url.searchParams.set("filter", "2");
-    url.searchParams.set("start", "1");
+    url.searchParams.set("start", String(currentStart));
     url.searchParams.set("limit", "50");
     url.searchParams.set("ip", "0.0.0.0");
     url.searchParams.set("ua", "ua");
@@ -80,6 +84,12 @@ async function fetchJobs() {
       console.error(`エラー [${target.keyword}]:`, data);
       return;
     }
+
+    // currentStartを次の値に更新
+    await prisma.searchKeyword.update({
+      where: { id: target.id },
+      data: { currentStart: nextStart },
+    });
 
     let createdCount = 0;
     let updatedCount = 0;
@@ -114,8 +124,8 @@ async function fetchJobs() {
           },
         },
         update: {
-          url: job.url,           // URLは毎回更新
-          tracking: job.tracking ?? null,  // トラッキングも更新
+          url: job.url,
+          tracking: job.tracking ?? null,
           jt: job.jt ?? null,
           st: job.st ?? null,
           area: job.area ?? null,
@@ -158,7 +168,7 @@ async function fetchJobs() {
     });
 
     console.log(
-      `[${now.toISOString()}] kw="${target.keyword}" fetched=${data.results.length} created=${createdCount} updated=${updatedCount} deleted=${deleted.count} total=${data.total}`
+      `[${now.toISOString()}] kw="${target.keyword}" start=${currentStart} fetched=${data.results.length} created=${createdCount} updated=${updatedCount} deleted=${deleted.count} total=${data.total}`
     );
   } catch (error) {
     console.error("fetchJobs error:", error);
