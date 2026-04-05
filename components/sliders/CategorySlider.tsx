@@ -41,49 +41,71 @@ const handleClick = (categoryNames: string[]) => {
 };
 
   return (
-    <div className="swiper-container swiper-group-5">
-      <Swiper
-        slidesPerView={4}
-        spaceBetween={30}
-        modules={[Navigation]}
-        navigation={{
-          prevEl: ".swiper-button-prev",
-          nextEl: ".swiper-button-next",
-        }}
-        breakpoints={{
-          320: { slidesPerView: 1, spaceBetween: 30 },
-          575: { slidesPerView: 2, spaceBetween: 30 },
-          767: { slidesPerView: 2, spaceBetween: 30 },
-          991: { slidesPerView: 3, spaceBetween: 30 },
-          1199: { slidesPerView: 4, spaceBetween: 30 },
-        }}
-        className="swiper-wrapper pb-70 pt-5 swiper-grid-jobobx"
-      >
-        {grouped.map((item) => (
-          <SwiperSlide key={item.group}>
-            <div
-              className="swiper-slide hover-up"
-              onClick={() => handleClick(item.categoryNames)}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="item-logo">
-                <div className="image-left">
-                  <img alt={item.group} src={item.config.icon} />
-                </div>
-                <div className="text-info-right">
-                  <h3 style={{ fontSize: "18px" }}>{item.config.label}</h3>
-                  <p className="font-xs" style={{ color: "#a0aec0" }}>
-                    {item.categoryNames.length}カテゴリ
-                  </p>
+    <>
+      <div className="swiper-container swiper-group-5">
+        <Swiper
+          slidesPerView={4}
+          spaceBetween={30}
+          modules={[Navigation]}
+          navigation={{
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
+          }}
+          breakpoints={{
+            320: { slidesPerView: 1, spaceBetween: 30 },
+            575: { slidesPerView: 2, spaceBetween: 30 },
+            767: { slidesPerView: 2, spaceBetween: 30 },
+            991: { slidesPerView: 3, spaceBetween: 30 },
+            1199: { slidesPerView: 4, spaceBetween: 30 },
+          }}
+          className="swiper-wrapper pb-70 pt-5 swiper-grid-jobobx"
+        >
+          {grouped.map((item) => (
+            <SwiperSlide key={item.group}>
+              <div
+                className="swiper-slide hover-up"
+                onClick={() => handleClick(item.categoryNames)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="item-logo">
+                  <div className="image-left">
+                    <img alt={item.group} src={item.config.icon} />
+                  </div>
+                  <div className="text-info-right">
+                    <h3>{item.config.label}</h3>
+                    <p className="font-xs" style={{ color: "#a0aec0" }}>
+                      {item.categoryNames.length}カテゴリ
+                    </p>
+                  </div>
                 </div>
               </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <div className="swiper-button-next" />
+        <div className="swiper-button-prev" />
+      </div>
+      <div className="category-slider-mobile-grid">
+        {grouped.map((item) => (
+          <div
+            key={item.group}
+            className="item-logo hover-up"
+            onClick={() => handleClick(item.categoryNames)}
+            style={{ cursor: "pointer" }}
+          >
+            <div className="image-left">
+              <img alt={item.group} src={item.config.icon} />
             </div>
-          </SwiperSlide>
+            <div className="text-info-right">
+              <h3>{item.config.label}</h3>
+              <p className="font-xs" style={{ color: "#a0aec0" }}>
+                {item.categoryNames.length}カテゴリ
+              </p>
+            </div>
+          </div>
         ))}
-      </Swiper>
-      <div className="swiper-button-next" />
-      <div className="swiper-button-prev" />
-    </div>
+      </div>
+    </>
   );
 };
 

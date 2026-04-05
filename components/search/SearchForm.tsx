@@ -63,7 +63,7 @@ export default function SearchForm({ workStyles, areas, categories, mode }: Prop
 
   return (
     <div className="form-find text-start mt-40 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-      <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1.1fr 1.1fr 1.5fr auto", gap: "0", alignItems: "center", maxWidth: "1680px", width: "100%", margin: "0 auto" }}>
+      <div className="search-form-grid">
 
         {/* 働き方 */}
         <div style={{ position: "relative", display: "flex", alignItems: "center", gap: "10px", padding: "0 18px", borderRight: "1px solid #e5e7eb", minHeight: "56px" }}>
@@ -94,7 +94,7 @@ export default function SearchForm({ workStyles, areas, categories, mode }: Prop
           </span>
           <ChevronDown size={16} color="#94a3b8" />
           {areaOpen && (
-            <ul className="dropdown-menu dropdown-menu-light show" style={{ position: "absolute", top: "100%", left: 0, zIndex: 9999, minWidth: "200px", maxHeight: "300px", overflowY: "auto" }}>
+            <ul className="dropdown-menu dropdown-menu-light show search-dropdown-center" style={{ position: "absolute", top: "100%", left: 0, zIndex: 9999, minWidth: "200px", maxHeight: "300px", overflowY: "auto" }}>
               <li><span className={`dropdown-item ${selectedArea === "" ? "active" : ""}`} style={{ cursor: "pointer" }} onClick={() => { setSelectedArea(""); setAreaOpen(false); }}>すべて</span></li>
               {areas.map((area) => (
                 <li key={area.id}>
@@ -115,7 +115,7 @@ export default function SearchForm({ workStyles, areas, categories, mode }: Prop
           </span>
           <ChevronDown size={16} color="#94a3b8" />
           {categoryOpen && (
-            <div style={{ position: "absolute", top: "100%", left: 0, zIndex: 9999, background: "#fff", border: "thin solid #b4c0e0", borderRadius: "10px", boxShadow: "0px 10px 20px -5px rgba(10,42,105,0.06)", padding: "15px 20px", minWidth: "360px" }}>
+            <div className="dropdown-menu dropdown-menu-light show search-dropdown-center" style={{ position: "absolute", top: "100%", left: 0, zIndex: 9999, background: "#fff", border: "thin solid #b4c0e0", borderRadius: "10px", boxShadow: "0px 10px 20px -5px rgba(10,42,105,0.06)", padding: "15px 20px", minWidth: "360px" }}>
 
               {groups.map((group) => (
                 <div key={group} style={{ marginBottom: "15px" }}>

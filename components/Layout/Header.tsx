@@ -36,7 +36,11 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
 <img 
   alt="映像求人PROポータル" 
   src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/eizo-job-logo%20(2).png"
-  style={{ height: "80px", width: "auto", objectFit: "contain" }}
+  style={{ 
+    height: "clamp(40px, 8vw, 80px)",
+    width: "auto", 
+    objectFit: "contain" 
+  }}
 />
                   </span>
                 </Link>
@@ -59,17 +63,19 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
                 </ul>
               </nav>
 
-              <div
+              <button
+                type="button"
                 className={`burger-icon burger-icon-white ${openClass ? "burger-close" : ""}`}
                 onClick={() => {
                   handleOpen();
                   handleRemove();
                 }}
+                aria-label="Toggle mobile menu"
               >
                 <span className="burger-icon-top" />
                 <span className="burger-icon-mid" />
                 <span className="burger-icon-bottom" />
-              </div>
+              </button>
             </div>
 
             <div className="header-right">
@@ -87,14 +93,7 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
         <div className="mobile-header-wrapper-inner">
           <div className="mobile-header-content-area">
             <div className="perfect-scroll">
-              <div className="mobile-search mobile-header-border mb-30">
-                <form action="#">
-                  <input type="text" placeholder="キーワード検索…" />
-                  <i className="fi-rr-search" />
-                </form>
-              </div>
-
-              <div className="mobile-menu-wrap mobile-header-border">
+<div className="mobile-menu-wrap mobile-header-border">
                 <nav>
                   <ul className="mobile-menu font-heading">
                     <li>
@@ -112,9 +111,9 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
               </div>
 
               <div className="site-copyright">
-                Copyright 2022 © JobBox.
+                Copyright © 2026 LUVAS. 
                 <br />
-                Designed by AliThemes.
+                All rights reserved
               </div>
             </div>
           </div>

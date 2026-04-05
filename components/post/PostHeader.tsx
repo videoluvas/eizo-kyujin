@@ -74,12 +74,55 @@ export default function PostHeader({ post }: Props) {
 
       {/* サムネイル */}
       {post.thumbnail && (
-        <div style={{ marginBottom: "24px", borderRadius: "12px", overflow: "hidden" }}>
+        <div
+          style={{
+            marginBottom: "24px",
+            borderRadius: "16px",
+            overflow: "hidden",
+            position: "relative",
+            boxShadow: "0 8px 32px rgba(59,100,244,0.15)",
+          }}
+        >
           <img
             src={post.thumbnail}
             alt={post.title}
-            style={{ width: "100%", height: "auto", display: "block" }}
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              filter: "brightness(0.93) saturate(1.15)",
+            }}
           />
+          {/* グラデーションオーバーレイ */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "35%",
+              background: "linear-gradient(to top, rgba(26,43,74,0.45), transparent)",
+            }}
+          />
+          {/* カテゴリバッジ（画像左上） */}
+          {post.category && (
+            <div
+              style={{
+                position: "absolute",
+                top: "16px",
+                left: "16px",
+                background: "#3B64F4",
+                color: "#fff",
+                fontSize: "12px",
+                fontWeight: "700",
+                padding: "4px 14px",
+                borderRadius: "20px",
+                letterSpacing: "0.5px",
+              }}
+            >
+              {post.category}
+            </div>
+          )}
         </div>
       )}
 

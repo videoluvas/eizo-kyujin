@@ -57,8 +57,8 @@ export default async function Home() {
     <Layout>
       <div className="bg-homepage1" />
 {/* SEO用h1 */}
-<div style={{ padding: "8px 0 0 192px" }}>
-  <h1 className="font-xs color-text-paragraph-2" style={{ fontSize: "12px", fontWeight: "400", lineHeight: "18px" }}>
+<div className="seo-heading-wrapper">
+  <h1 className="seo-heading-1 font-xs color-text-paragraph-2">
     映像業界・動画制作に特化した転職求人検索サービス
   </h1>
 </div>
@@ -86,7 +86,7 @@ export default async function Home() {
                 {/* スポンサー表記 */}
                 <div className="mt-45 text-center">
                   <a href="https://xn--pckua2a7gp15o89zb.com/" target="_blank" rel="noopener noreferrer">
-                    <img src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/logo_kyuzin_box_01.png" alt="求人ボックス" style={{ height: "40px", verticalAlign: "middle" }} />
+                    <img className="sponsor-logo" src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/logo_kyuzin_box_01.png" alt="求人ボックス" />
                   </a>
                 </div>
                 </div>
@@ -115,7 +115,7 @@ export default async function Home() {
       <div className="mt-100" />
 
       {/* 注目の求人 */}
-      <section className="section-box mt-50">
+      <section className="section-box mt-50 section-category-mobile-tight">
         <div className="container">
           <div className="text-center">
             <h2 className="section-title mb-10 wow animate__animated animate__fadeInUp">人気の求人カテゴリ</h2>
@@ -183,7 +183,7 @@ export default async function Home() {
       </section>
 
      {/* 勤務地から求人を探す */}
-<section className="section-box mt-50">
+<section className="section-box mt-50 area-card-section">
   <div className="container">
     <div className="text-center">
       <h2 className="section-title mb-10 wow animate__animated animate__fadeInUp">勤務地から転職求人を探す</h2>

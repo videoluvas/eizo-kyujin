@@ -11,19 +11,23 @@ datasource db {
 }
 
 model Job {
-  id        Int       @id @default(autoincrement())
-  url       String    @unique @db.Text
-  title     String    @db.Text
-  company   String    @db.Text
-  jt        String?   @db.Text
-  st        String?   @db.Text
-  area      String?   @db.Text
-  snippet   String?   @db.Text
-  update    DateTime?
-  tracking  String?   @db.Text
-  category  String[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          Int       @id @default(autoincrement())
+  url         String    @unique @db.Text
+  title       String    @db.Text
+  company     String    @db.Text
+  jt          String?   @db.Text
+  st          String?   @db.Text
+  area        String?   @db.Text
+  snippet     String?   @db.Text
+  update      DateTime?
+  tracking    String?   @db.Text
+  category    String[]
+
+  firstSeenAt DateTime  @default(now()) @map("first_seen_at")
+  lastSeenAt  DateTime  @default(now()) @map("last_seen_at")
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@map("jobs")
 }

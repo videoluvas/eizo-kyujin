@@ -86,8 +86,8 @@ const categoryList = category
     <>
       <Layout>
         {/* SEO用h1 */}
-<div style={{ padding: "8px 0 0 192px" }}>
-  <h1 className="font-xs color-text-paragraph-2" style={{ fontSize: "12px", fontWeight: "400", lineHeight: "18px" }}>
+<div className="page-seo-hidden">
+  <h1>
     映像業界・動画制作の転職求人検索｜未経験・編集・ディレクター案件掲載
   </h1>
 </div>

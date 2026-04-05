@@ -32,13 +32,7 @@ const Sidebar = ({ openClass }: SidebarProps) => {
         <div className="mobile-header-wrapper-inner">
           <div className="mobile-header-content-area">
             <div className="perfect-scroll">
-              <div className="mobile-search mobile-header-border mb-30">
-                <form action="#">
-                  <input type="text" placeholder="Search…" />
-                  <i className="fi-rr-search" />
-                </form>
-              </div>
-              <div className="mobile-menu-wrap mobile-header-border">
+<div className="mobile-menu-wrap mobile-header-border">
                 {/* mobile menu start*/}
                 <nav>
   <ul className="mobile-menu font-heading">
