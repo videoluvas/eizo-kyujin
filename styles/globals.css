@@ -347,17 +347,18 @@
   }
 
   .search-form-grid .dropdown-menu.search-dropdown-center {
-    position: fixed !important;
-    top: 16% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: min(calc(100vw - 32px), 420px) !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    width: 100% !important;
     max-width: 100% !important;
     max-height: calc(80vh) !important;
-    border-radius: 20px !important;
+    border-radius: 12px !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.16) !important;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.12) !important;
   }
 
   .search-form-grid .dropdown-menu.search-dropdown-center .dropdown-item,

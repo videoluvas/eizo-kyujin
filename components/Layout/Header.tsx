@@ -33,18 +33,31 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
               <div className="header-logo">
                 <Link href="/">
                   <span className="d-flex">
-<img 
-  alt="映像求人PROポータル" 
+<img
+  alt="映像求人PROポータル"
   src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/eizo-job-logo%20(2).png"
-  style={{ 
+  style={{
     height: "clamp(40px, 8vw, 80px)",
-    width: "auto", 
-    objectFit: "contain" 
+    width: "auto",
+    objectFit: "contain"
   }}
 />
                   </span>
                 </Link>
               </div>
+              <button
+                type="button"
+                className={`burger-icon burger-icon-white ${openClass ? "burger-close" : ""}`}
+                onClick={() => {
+                  handleOpen();
+                  handleRemove();
+                }}
+                aria-label="Toggle mobile menu"
+              >
+                <span className="burger-icon-top" />
+                <span className="burger-icon-mid" />
+                <span className="burger-icon-bottom" />
+              </button>
             </div>
 
             <div className="header-nav">
@@ -67,20 +80,6 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
                   </li>
                 </ul>
               </nav>
-
-              <button
-                type="button"
-                className={`burger-icon burger-icon-white ${openClass ? "burger-close" : ""}`}
-                onClick={() => {
-                  handleOpen();
-                  handleRemove();
-                }}
-                aria-label="Toggle mobile menu"
-              >
-                <span className="burger-icon-top" />
-                <span className="burger-icon-mid" />
-                <span className="burger-icon-bottom" />
-              </button>
             </div>
 
             <div className="header-right">

@@ -11,8 +11,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost"
-      }
+        hostname: "localhost",
+      },
     ],
   },
   webpack: (config, { dev }) => {
@@ -27,10 +27,6 @@ const nextConfig = {
     }
 
     return config;
-  },
-  productionBrowserSourceMaps: false,
-  sassOptions: {
-    sourceMap: false,
   },
 };
 
