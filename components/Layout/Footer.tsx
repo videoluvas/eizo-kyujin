@@ -34,6 +34,9 @@ const Footer = () => {
                 <Link href="/jobs-list">求人一覧</Link>
               </li>
               <li>
+                <Link href="/post">転職コラム</Link>
+              </li>
+              <li>
                 <a href="https://luvas.red" target="_blank">
                   運営会社
                 </a>

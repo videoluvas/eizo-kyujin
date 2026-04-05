@@ -42,6 +42,11 @@ const Sidebar = ({ openClass }: SidebarProps) => {
       </Link>
     </li>
     <li>
+      <Link href="/post">
+        <span>転職コラム</span>
+      </Link>
+    </li>
+    <li>
       <Link href="https://www.luvas.red/">
         <span>運営会社</span>
       </Link>

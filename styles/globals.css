@@ -470,6 +470,7 @@
     left: auto !important;
     box-sizing: border-box !important;
     overflow-x: hidden !important;
+    z-index: 9999 !important;
   }
 
   .mobile-header-wrapper-style .mobile-header-wrapper-inner {
