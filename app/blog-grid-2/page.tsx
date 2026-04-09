@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } };
+
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
 import Layout from "@/components/Layout/Layout";

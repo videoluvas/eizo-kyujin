@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } };
+
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/Layout/Layout";

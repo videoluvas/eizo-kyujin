@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } };
+
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";

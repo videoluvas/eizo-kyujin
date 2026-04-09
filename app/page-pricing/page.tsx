@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } };
+
 import Layout from "@/components/Layout/Layout";
 import TestimonialSlider1 from "@/components/sliders/Testimonial1";
 

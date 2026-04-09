@@ -1,3 +1,5 @@
+export const metadata = { robots: { index: false, follow: false } };
+
 import Link from "next/link";
 import Layout from "@/components/Layout/Layout";
 import BlogSlider from "@/components/sliders/Blog";
