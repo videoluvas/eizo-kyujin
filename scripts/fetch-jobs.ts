@@ -60,19 +60,15 @@ async function fetchJobs() {
 
     const currentStart = target.currentStart ?? 1;
 
-    // totalベースでnextStartを計算、total未取得の場合はそのまま+50
-    const total = target.total;
-    const nextStart = (total && currentStart + 50 >= total) || currentStart + 50 > 950 ? 1 : currentStart + 50;
-
     const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
     url.searchParams.set("key", API_KEY);
     url.searchParams.set("publisher", PUBLISHER_ID);
     url.searchParams.set("domain", DOMAIN);
     url.searchParams.set("format", "json");
     url.searchParams.set("kw", target.keyword);
-    url.searchParams.set("jt", "1");       // 正社員
-    url.searchParams.set("st", "3");       // 年収
-    url.searchParams.set("update", "2");   // 3日以内
+    url.searchParams.set("jt", "1");
+    url.searchParams.set("st", "3");
+    url.searchParams.set("update", "2");
     url.searchParams.set("filter", "2");
     url.searchParams.set("start", String(currentStart));
     url.searchParams.set("limit", "50");
@@ -80,6 +76,21 @@ async function fetchJobs() {
     url.searchParams.set("ua", "ua");
 
     const res = await fetch(url.toString());
+
+    // 400エラー＝上限超え → リセット
+    if (res.status === 400) {
+      await prisma.searchKeyword.update({
+        where: { id: target.id },
+        data: {
+          currentStart: 1,
+          total: currentStart - 1,
+        },
+      });
+      console.log(
+        `[${now.toISOString()}] kw="${target.keyword}" 400エラー→リセット total確定=${currentStart - 1}`
+      );
+      return;
+    }
 
     if (!res.ok) {
       const text = await res.text();
@@ -93,12 +104,26 @@ async function fetchJobs() {
       return;
     }
 
-    // currentStartとtotalを更新
+    const fetchedCount = data.results.length;
+
+    // 50件未満 → 最後まで取得 → リセット、totalを確定
+    // 50件 → まだ続きあり → 次のstartへ
+    let nextStart: number;
+    let confirmedTotal: number | null;
+
+    if (fetchedCount < 50) {
+      nextStart = 1;
+      confirmedTotal = currentStart + fetchedCount - 1;
+    } else {
+      nextStart = currentStart + 50;
+      confirmedTotal = null; // まだ確定しない
+    }
+
     await prisma.searchKeyword.update({
       where: { id: target.id },
       data: {
         currentStart: nextStart,
-        total: data.total ?? null,
+        ...(confirmedTotal !== null ? { total: confirmedTotal } : {}),
       },
     });
 
@@ -178,8 +203,9 @@ async function fetchJobs() {
       },
     });
 
+    const total = target.total;
     console.log(
-      `[${now.toISOString()}] kw="${target.keyword}" progress=${currentStart}/${total ?? "?"} fetched=${data.results.length} created=${createdCount} updated=${updatedCount} deleted=${deleted.count}`
+      `[${now.toISOString()}] kw="${target.keyword}" progress=${currentStart}/${confirmedTotal ?? total ?? "?"} fetched=${fetchedCount} created=${createdCount} updated=${updatedCount} deleted=${deleted.count}`
     );
   } catch (error) {
     console.error("fetchJobs error:", error);
