@@ -69,7 +69,7 @@ async function fetchJobs() {
       kw: target.keyword,
       jt: "1",
       st: "3",
-      update: "2",
+      update: "3",
       filter: "2",
       start: String(currentStart),
       limit: "50",
