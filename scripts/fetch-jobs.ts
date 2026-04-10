@@ -51,13 +51,18 @@ async function fetchJobs() {
 
     const categories = await prisma.category.findMany();
 
-    // 今の分数でキーワードをローテーション
-    const minute = now.getMinutes();
-    const target = searchKeywords[minute % searchKeywords.length];
+    // 進捗率が最も低いキーワードを選ぶ
+    const target = searchKeywords.sort((a, b) => {
+      const progressA = a.total ? a.currentStart / a.total : 0;
+      const progressB = b.total ? b.currentStart / b.total : 0;
+      return progressA - progressB;
+    })[0];
 
-    // currentStartを使って順番に取得
-    const currentStart = target.currentStart || 1;
-    const nextStart = currentStart + 50 > 950 ? 1 : currentStart + 50;
+    const currentStart = target.currentStart ?? 1;
+
+    // totalベースでnextStartを計算、total未取得の場合はそのまま+50
+    const total = target.total;
+    const nextStart = total && currentStart + 50 >= total ? 1 : currentStart + 50;
 
     const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
     url.searchParams.set("key", API_KEY);
@@ -85,10 +90,13 @@ async function fetchJobs() {
       return;
     }
 
-    // currentStartを次の値に更新
+    // currentStartとtotalを更新
     await prisma.searchKeyword.update({
       where: { id: target.id },
-      data: { currentStart: nextStart },
+      data: {
+        currentStart: nextStart,
+        total: data.total ?? null,
+      },
     });
 
     let createdCount = 0;
@@ -156,8 +164,8 @@ async function fetchJobs() {
       }
     }
 
-    // 24時間以上取得できていない求人を削除
-    const cutoff = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    // 72時間以上取得できていない求人を削除
+    const cutoff = new Date(now.getTime() - 72 * 60 * 60 * 1000);
 
     const deleted = await prisma.job.deleteMany({
       where: {
@@ -168,7 +176,7 @@ async function fetchJobs() {
     });
 
     console.log(
-      `[${now.toISOString()}] kw="${target.keyword}" start=${currentStart} fetched=${data.results.length} created=${createdCount} updated=${updatedCount} deleted=${deleted.count} total=${data.total}`
+      `[${now.toISOString()}] kw="${target.keyword}" progress=${currentStart}/${total ?? "?"} fetched=${data.results.length} created=${createdCount} updated=${updatedCount} deleted=${deleted.count}`
     );
   } catch (error) {
     console.error("fetchJobs error:", error);

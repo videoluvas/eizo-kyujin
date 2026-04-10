@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client"
   output   = "../../app/generated/prisma"
@@ -12,32 +9,30 @@ datasource db {
 
 model Job {
   id          Int       @id @default(autoincrement())
-  url         String    @db.Text
-  title       String    @db.Text
-  company     String    @db.Text
-  jt          String?   @db.Text
-  st          String?   @db.Text
-  area        String?   @db.Text
-  snippet     String?   @db.Text
+  url         String
+  title       String
+  company     String
+  jt          String?
+  st          String?
+  area        String?
+  snippet     String?
   update      DateTime?
-  tracking    String?   @db.Text
-  category    String[]
-
-  firstSeenAt DateTime  @default(now()) @map("first_seen_at")
-  lastSeenAt  DateTime  @default(now()) @map("last_seen_at")
-
+  tracking    String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  category    String[]
+  firstSeenAt DateTime  @default(now()) @map("first_seen_at")
+  lastSeenAt  DateTime  @default(now()) @map("last_seen_at")
 
   @@unique([title, company])
   @@map("jobs")
 }
 
 model Category {
-  nameEn   String @id @map("name_en") @db.Text
-  group    String @db.Text
-  name     String @unique @db.Text
-  keywords String @default("") @db.Text
+  nameEn   String @id @map("name_en")
+  group    String
+  name     String @unique
+  keywords String @default("")
   order    Int    @default(0)
   icon     String @default("")
 
@@ -46,7 +41,7 @@ model Category {
 
 model SearchKeyword {
   id           Int      @id @default(autoincrement())
-  keyword      String   @unique @db.Text
+  keyword      String   @unique
   total        Int?
   currentStart Int      @default(1) @map("current_start")
   isActive     Boolean  @default(true) @map("is_active")
@@ -58,7 +53,7 @@ model SearchKeyword {
 
 model WorkStyle {
   id        Int      @id @default(autoincrement())
-  name      String   @unique @db.Text
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -67,10 +62,10 @@ model WorkStyle {
 
 model Area {
   id        Int      @id @default(autoincrement())
-  name      String   @unique @db.Text
-  order     Int      @default(0)
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  order     Int      @default(0)
   imgUrl    String   @default("")
 
   @@map("areas")
@@ -78,12 +73,12 @@ model Area {
 
 model SeoSetting {
   id            Int    @id @default(autoincrement())
-  page          String @unique @db.Text
-  title         String @db.Text
-  description   String @db.Text
-  ogTitle       String @default("") @db.Text
-  ogDescription String @default("") @db.Text
-  ogImage       String @default("") @db.Text
+  page          String @unique
+  title         String
+  description   String
+  ogTitle       String @default("")
+  ogDescription String @default("")
+  ogImage       String @default("")
 
   @@map("seo_settings")
 }
