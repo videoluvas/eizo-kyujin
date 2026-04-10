@@ -27,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return { title: "エラー" };
   }
 }
+
 type Props = {
   searchParams: Promise<{
     workStyle?: string;
@@ -42,34 +43,37 @@ type Props = {
 export default async function JobList({ searchParams }: Props) {
   const { workStyle, area, category, kw } = await searchParams;
 
-const categoryList = category
-  ? Array.isArray(category)
-    ? category
-    : category.split(",")
-  : [];
+  // 特殊文字をエスケープ
+  const escapedKw = kw ? kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") : "";
+
+  const categoryList = category
+    ? Array.isArray(category)
+      ? category
+      : category.split(",")
+    : [];
 
   const where: any = {};
   if (workStyle) where.jt = { contains: workStyle };
   if (area) where.area = { contains: area };
 
-  if (categoryList.length > 0 && kw) {
+  if (categoryList.length > 0 && escapedKw) {
     where.AND = [
       { OR: categoryList.map((cat) => ({ category: { has: cat } })) },
       { OR: [
-        { title: { contains: kw, mode: "insensitive" } },
-        { snippet: { contains: kw, mode: "insensitive" } },
-        { company: { contains: kw, mode: "insensitive" } },
-        { area: { contains: kw, mode: "insensitive" } },
+        { title: { contains: escapedKw, mode: "insensitive" } },
+        { snippet: { contains: escapedKw, mode: "insensitive" } },
+        { company: { contains: escapedKw, mode: "insensitive" } },
+        { area: { contains: escapedKw, mode: "insensitive" } },
       ]},
     ];
   } else if (categoryList.length > 0) {
     where.OR = categoryList.map((cat) => ({ category: { has: cat } }));
-  } else if (kw) {
+  } else if (escapedKw) {
     where.OR = [
-      { title: { contains: kw, mode: "insensitive" } },
-      { snippet: { contains: kw, mode: "insensitive" } },
-      { company: { contains: kw, mode: "insensitive" } },
-      { area: { contains: kw, mode: "insensitive" } },
+      { title: { contains: escapedKw, mode: "insensitive" } },
+      { snippet: { contains: escapedKw, mode: "insensitive" } },
+      { company: { contains: escapedKw, mode: "insensitive" } },
+      { area: { contains: escapedKw, mode: "insensitive" } },
     ];
   }
 
@@ -86,11 +90,11 @@ const categoryList = category
     <>
       <Layout>
         {/* SEO用h1 */}
-<div className="page-seo-hidden">
-  <h1>
-    映像業界・動画制作の転職求人検索｜未経験・編集・ディレクター案件掲載
-  </h1>
-</div>
+        <div className="page-seo-hidden">
+          <h1>
+            映像業界・動画制作の転職求人検索｜未経験・編集・ディレクター案件掲載
+          </h1>
+        </div>
         <div>
           <section className="section-box-2">
             <div className="container">
@@ -102,11 +106,9 @@ const categoryList = category
                   <div className="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                     映像制作者・動画クリエイター向けの転職求人を掲載中。
                     <br className="d-none d-xl-block" />
-                    
-動画制作会社・事業会社・スタジオなど、幅広い求人から検索できます。
-
-勤務地・職種・雇用形態・キーワードで絞り込み、
-自分に合った転職先を見つけましょう。
+                    動画制作会社・事業会社・スタジオなど、幅広い求人から検索できます。
+                    勤務地・職種・雇用形態・キーワードで絞り込み、
+                    自分に合った転職先を見つけましょう。
                   </div>
                   <Suspense>
                     <SearchForm workStyles={workStyles} areas={areas} categories={categories} mode="list" />

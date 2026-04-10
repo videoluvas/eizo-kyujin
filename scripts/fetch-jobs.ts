@@ -62,7 +62,7 @@ async function fetchJobs() {
 
     // totalベースでnextStartを計算、total未取得の場合はそのまま+50
     const total = target.total;
-    const nextStart = total && currentStart + 50 >= total ? 1 : currentStart + 50;
+    const nextStart = (total && currentStart + 50 >= total) || currentStart + 50 > 950 ? 1 : currentStart + 50;
 
     const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
     url.searchParams.set("key", API_KEY);
