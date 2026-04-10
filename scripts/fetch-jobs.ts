@@ -70,6 +70,9 @@ async function fetchJobs() {
     url.searchParams.set("domain", DOMAIN);
     url.searchParams.set("format", "json");
     url.searchParams.set("kw", target.keyword);
+    url.searchParams.set("jt", "1");       // 正社員
+    url.searchParams.set("st", "3");       // 年収
+    url.searchParams.set("update", "3");   // 7日以内
     url.searchParams.set("filter", "2");
     url.searchParams.set("start", String(currentStart));
     url.searchParams.set("limit", "50");
