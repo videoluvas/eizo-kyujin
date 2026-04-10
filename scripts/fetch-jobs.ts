@@ -60,22 +60,25 @@ async function fetchJobs() {
 
     const currentStart = target.currentStart ?? 1;
 
-    const url = new URL("https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs");
-    url.searchParams.set("key", API_KEY);
-    url.searchParams.set("publisher", PUBLISHER_ID);
-    url.searchParams.set("domain", DOMAIN);
-    url.searchParams.set("format", "json");
-    url.searchParams.set("kw", target.keyword);
-    url.searchParams.set("jt", "1");
-    url.searchParams.set("st", "3");
-    url.searchParams.set("update", "2");
-    url.searchParams.set("filter", "2");
-    url.searchParams.set("start", String(currentStart));
-    url.searchParams.set("limit", "50");
-    url.searchParams.set("ip", "0.0.0.0");
-    url.searchParams.set("ua", "ua");
+    // +をスペースではなく%20でエンコード
+    const queryString = new URLSearchParams({
+      key: API_KEY,
+      publisher: PUBLISHER_ID,
+      domain: DOMAIN,
+      format: "json",
+      kw: target.keyword,
+      jt: "1",
+      st: "3",
+      update: "2",
+      filter: "2",
+      start: String(currentStart),
+      limit: "50",
+      ip: "0.0.0.0",
+      ua: "ua",
+    }).toString().replace(/\+/g, "%20");
 
-    const res = await fetch(url.toString());
+    const fullUrl = `https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs?${queryString}`;
+    const res = await fetch(fullUrl);
 
     // 400エラー＝上限超え → リセット
     if (res.status === 400) {
@@ -83,11 +86,11 @@ async function fetchJobs() {
         where: { id: target.id },
         data: {
           currentStart: 1,
-          total: currentStart - 1,
+          total: currentStart > 1 ? currentStart - 1 : null,
         },
       });
       console.log(
-        `[${now.toISOString()}] kw="${target.keyword}" 400エラー→リセット total確定=${currentStart - 1}`
+        `[${now.toISOString()}] kw="${target.keyword}" 400エラー→リセット total確定=${currentStart > 1 ? currentStart - 1 : "null"}`
       );
       return;
     }
@@ -116,7 +119,7 @@ async function fetchJobs() {
       confirmedTotal = currentStart + fetchedCount - 1;
     } else {
       nextStart = currentStart + 50;
-      confirmedTotal = null; // まだ確定しない
+      confirmedTotal = null;
     }
 
     await prisma.searchKeyword.update({
