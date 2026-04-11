@@ -184,6 +184,7 @@ await prisma.searchKeyword.update({
           update: job.update ? new Date(job.update) : null,
           tracking: job.tracking ?? null,
           category,
+            sourceKeyword: target.keyword,
           firstSeenAt: now,
           lastSeenAt: now,
         },
