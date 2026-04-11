@@ -24,10 +24,30 @@ model Job {
   firstSeenAt DateTime  @default(now()) @map("first_seen_at")
   lastSeenAt  DateTime  @default(now()) @map("last_seen_at")
   sourceKeyword String?  @map("source_keyword")
-  isPublished   Boolean  @default(true) @map("is_published")
 
   @@unique([title, company])
   @@map("jobs")
+}
+
+model ArchivedJob {
+  id            Int       @id @default(autoincrement())
+  originalId    Int       @map("original_id")
+  url           String
+  title         String
+  company       String
+  jt            String?
+  st            String?
+  area          String?
+  snippet       String?
+  update        DateTime?
+  tracking      String?
+  category      String[]
+  sourceKeyword String?   @map("source_keyword")
+  firstSeenAt   DateTime  @map("first_seen_at")
+  lastSeenAt    DateTime  @map("last_seen_at")
+  archivedAt    DateTime  @default(now()) @map("archived_at")
+  archivedBy    String    @default("") @map("archived_by")
+  @@map("archived_jobs")
 }
 
 model Category {
