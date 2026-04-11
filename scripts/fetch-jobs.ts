@@ -122,14 +122,14 @@ async function fetchJobs() {
       confirmedTotal = null;
     }
 
-    await prisma.searchKeyword.update({
-      where: { id: target.id },
-      data: {
-        currentStart: nextStart,
-        ...(isCompleted ? { fetchCount: { increment: 1 } } : {}),
-        ...(confirmedTotal !== null ? { total: confirmedTotal } : {}),
-      },
-    });
+await prisma.searchKeyword.update({
+  where: { id: target.id },
+  data: {
+    currentStart: nextStart,
+    total: isCompleted ? confirmedTotal : null,
+    ...(isCompleted ? { fetchCount: { increment: 1 } } : {}),
+  },
+});
 
     let createdCount = 0;
     let updatedCount = 0;
