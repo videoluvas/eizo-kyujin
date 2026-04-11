@@ -51,16 +51,13 @@ async function fetchJobs() {
 
     const categories = await prisma.category.findMany();
 
-    // 進捗率が最も低いキーワードを選ぶ
-    const target = searchKeywords.sort((a, b) => {
-      const progressA = a.total ? a.currentStart / a.total : 0;
-      const progressB = b.total ? b.currentStart / b.total : 0;
-      return progressA - progressB;
-    })[0];
+    // fetchCountが最小のグループからランダム選択
+    const minFetchCount = Math.min(...searchKeywords.map((k) => k.fetchCount));
+    const candidates = searchKeywords.filter((k) => k.fetchCount === minFetchCount);
+    const target = candidates[Math.floor(Math.random() * candidates.length)];
 
     const currentStart = target.currentStart ?? 1;
 
-    // +をスペースではなく%20でエンコード
     const queryString = new URLSearchParams({
       key: API_KEY,
       publisher: PUBLISHER_ID,
@@ -80,17 +77,18 @@ async function fetchJobs() {
     const fullUrl = `https://xn--pckua2a7gp15o89zb.com/api/a/v1/jobs?${queryString}`;
     const res = await fetch(fullUrl);
 
-    // 400エラー＝上限超え → リセット
+    // 400エラー＝上限超え → リセット＋fetchCount+1
     if (res.status === 400) {
       await prisma.searchKeyword.update({
         where: { id: target.id },
         data: {
           currentStart: 1,
+          fetchCount: { increment: 1 },
           total: currentStart > 1 ? currentStart - 1 : null,
         },
       });
       console.log(
-        `[${now.toISOString()}] kw="${target.keyword}" 400エラー→リセット total確定=${currentStart > 1 ? currentStart - 1 : "null"}`
+        `[${now.toISOString()}] kw="${target.keyword}" 400エラー→リセット fetchCount+1`
       );
       return;
     }
@@ -109,15 +107,17 @@ async function fetchJobs() {
 
     const fetchedCount = data.results.length;
 
-    // 50件未満 → 最後まで取得 → リセット、totalを確定
-    // 50件 → まだ続きあり → 次のstartへ
     let nextStart: number;
     let confirmedTotal: number | null;
+    let isCompleted = false;
 
     if (fetchedCount < 50) {
+      // 全件取得完了 → リセット＋fetchCount+1
       nextStart = 1;
       confirmedTotal = currentStart + fetchedCount - 1;
+      isCompleted = true;
     } else {
+      // 続きあり
       nextStart = currentStart + 50;
       confirmedTotal = null;
     }
@@ -126,6 +126,7 @@ async function fetchJobs() {
       where: { id: target.id },
       data: {
         currentStart: nextStart,
+        ...(isCompleted ? { fetchCount: { increment: 1 } } : {}),
         ...(confirmedTotal !== null ? { total: confirmedTotal } : {}),
       },
     });
@@ -195,20 +196,15 @@ async function fetchJobs() {
       }
     }
 
-    // 72時間以上取得できていない求人を削除
     const cutoff = new Date(now.getTime() - 72 * 60 * 60 * 1000);
-
     const deleted = await prisma.job.deleteMany({
       where: {
-        lastSeenAt: {
-          lt: cutoff,
-        },
+        lastSeenAt: { lt: cutoff },
       },
     });
 
-    const total = target.total;
     console.log(
-      `[${now.toISOString()}] kw="${target.keyword}" progress=${currentStart}/${confirmedTotal ?? total ?? "?"} fetched=${fetchedCount} created=${createdCount} updated=${updatedCount} deleted=${deleted.count}`
+      `[${now.toISOString()}] kw="${target.keyword}" progress=${currentStart}/${confirmedTotal ?? target.total ?? "?"} fetched=${fetchedCount} created=${createdCount} updated=${updatedCount} deleted=${deleted.count}${isCompleted ? " ✅完了→fetchCount+1" : ""}`
     );
   } catch (error) {
     console.error("fetchJobs error:", error);
