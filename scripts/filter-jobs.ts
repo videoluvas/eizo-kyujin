@@ -17,32 +17,49 @@ async function filterJobs() {
       return;
     }
 
-    let totalHidden = 0;
+    let totalArchived = 0;
 
     for (const ng of ngKeywords) {
-      const targets = ng.targets; // ["title", "company", "snippet"]
-
-      const orConditions = targets.map((target) => ({
+      const orConditions = ng.targets.map((target) => ({
         [target]: { contains: ng.keyword },
       }));
 
-      const result = await prisma.job.updateMany({
-        where: {
-          isPublished: true,
-          OR: orConditions,
-        },
-        data: {
-          isPublished: false,
-        },
+      const matched = await prisma.job.findMany({
+        where: { OR: orConditions },
       });
 
-      if (result.count > 0) {
-        console.log(`[${now.toISOString()}] NG="${ng.keyword}" targets=${targets.join(",")} hidden=${result.count}`);
-        totalHidden += result.count;
+      for (const job of matched) {
+        await prisma.archivedJob.create({
+          data: {
+            originalId: job.id,
+            url: job.url,
+            title: job.title,
+            company: job.company,
+            jt: job.jt,
+            st: job.st,
+            area: job.area,
+            snippet: job.snippet,
+            update: job.update,
+            tracking: job.tracking,
+            category: job.category,
+            sourceKeyword: job.sourceKeyword,
+            firstSeenAt: job.firstSeenAt,
+            lastSeenAt: job.lastSeenAt,
+            archivedAt: now,
+            archivedBy: ng.keyword,
+          },
+        });
+
+        await prisma.job.delete({ where: { id: job.id } });
+        totalArchived++;
+      }
+
+      if (matched.length > 0) {
+        console.log(`[${now.toISOString()}] NG="${ng.keyword}" targets=${ng.targets.join(",")} archived=${matched.length}`);
       }
     }
 
-    console.log(`[${now.toISOString()}] 合計非公開=${totalHidden}`);
+    console.log(`[${now.toISOString()}] 合計アーカイブ=${totalArchived}`);
   } catch (error) {
     console.error("filterJobs error:", error);
   } finally {
