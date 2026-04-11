@@ -23,6 +23,8 @@ model Job {
   category    String[]
   firstSeenAt DateTime  @default(now()) @map("first_seen_at")
   lastSeenAt  DateTime  @default(now()) @map("last_seen_at")
+  sourceKeyword String?  @map("source_keyword")
+  isPublished   Boolean  @default(true) @map("is_published")
 
   @@unique([title, company])
   @@map("jobs")
@@ -50,6 +52,15 @@ model SearchKeyword {
   fetchCount  Int  @default(0)
 
   @@map("search_keywords")
+}
+
+model NgKeyword {
+  id        Int      @id @default(autoincrement())
+  keyword   String   @unique
+  targets   String[] // ["title", "company", "snippet"]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("ng_keywords")
 }
 
 model WorkStyle {
