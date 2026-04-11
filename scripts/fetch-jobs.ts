@@ -1,6 +1,7 @@
 import { PrismaClient } from "../app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import * as dotenv from "dotenv";
+import { filterJobs } from "./filter-jobs";
 dotenv.config();
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
@@ -112,24 +113,22 @@ async function fetchJobs() {
     let isCompleted = false;
 
     if (fetchedCount < 50) {
-      // 全件取得完了 → リセット＋fetchCount+1
       nextStart = 1;
       confirmedTotal = currentStart + fetchedCount - 1;
       isCompleted = true;
     } else {
-      // 続きあり
       nextStart = currentStart + 50;
       confirmedTotal = null;
     }
 
-await prisma.searchKeyword.update({
-  where: { id: target.id },
-  data: {
-    currentStart: nextStart,
-    total: isCompleted ? confirmedTotal : null,
-    ...(isCompleted ? { fetchCount: { increment: 1 } } : {}),
-  },
-});
+    await prisma.searchKeyword.update({
+      where: { id: target.id },
+      data: {
+        currentStart: nextStart,
+        total: isCompleted ? confirmedTotal : null,
+        ...(isCompleted ? { fetchCount: { increment: 1 } } : {}),
+      },
+    });
 
     let createdCount = 0;
     let updatedCount = 0;
@@ -172,7 +171,7 @@ await prisma.searchKeyword.update({
           snippet: job.snippet ?? null,
           update: job.update ? new Date(job.update) : null,
           lastSeenAt: now,
-                      sourceKeyword: target.keyword,
+          sourceKeyword: target.keyword,
         },
         create: {
           url: job.url,
@@ -187,7 +186,7 @@ await prisma.searchKeyword.update({
           category,
           firstSeenAt: now,
           lastSeenAt: now,
-                      sourceKeyword: target.keyword,
+          sourceKeyword: target.keyword,
         },
       });
 
@@ -208,6 +207,9 @@ await prisma.searchKeyword.update({
     console.log(
       `[${now.toISOString()}] kw="${target.keyword}" progress=${currentStart}/${confirmedTotal ?? target.total ?? "?"} fetched=${fetchedCount} created=${createdCount} updated=${updatedCount} deleted=${deleted.count}${isCompleted ? " ✅完了→fetchCount+1" : ""}`
     );
+
+    await filterJobs();
+
   } catch (error) {
     console.error("fetchJobs error:", error);
   } finally {

@@ -6,7 +6,7 @@ dotenv.config();
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
-async function filterJobs() {
+export async function filterJobs() {
   const now = new Date();
 
   try {
@@ -29,26 +29,41 @@ async function filterJobs() {
       });
 
       for (const job of matched) {
-        await prisma.archivedJob.create({
-          data: {
-            originalId: job.id,
-            url: job.url,
-            title: job.title,
-            company: job.company,
-            jt: job.jt,
-            st: job.st,
-            area: job.area,
-            snippet: job.snippet,
-            update: job.update,
-            tracking: job.tracking,
-            category: job.category,
-            sourceKeyword: job.sourceKeyword,
-            firstSeenAt: job.firstSeenAt,
-            lastSeenAt: job.lastSeenAt,
-            archivedAt: now,
-            archivedBy: ng.keyword,
-          },
+        const existing = await prisma.archivedJob.findFirst({
+          where: { originalId: job.id },
         });
+
+        if (existing) {
+          await prisma.archivedJob.update({
+            where: { id: existing.id },
+            data: {
+              lastSeenAt: job.lastSeenAt,
+              archivedAt: now,
+              archivedBy: ng.keyword,
+            },
+          });
+        } else {
+          await prisma.archivedJob.create({
+            data: {
+              originalId: job.id,
+              url: job.url,
+              title: job.title,
+              company: job.company,
+              jt: job.jt,
+              st: job.st,
+              area: job.area,
+              snippet: job.snippet,
+              update: job.update,
+              tracking: job.tracking,
+              category: job.category,
+              sourceKeyword: job.sourceKeyword,
+              firstSeenAt: job.firstSeenAt,
+              lastSeenAt: job.lastSeenAt,
+              archivedAt: now,
+              archivedBy: ng.keyword,
+            },
+          });
+        }
 
         await prisma.job.delete({ where: { id: job.id } });
         totalArchived++;
@@ -62,9 +77,5 @@ async function filterJobs() {
     console.log(`[${now.toISOString()}] 合計アーカイブ=${totalArchived}`);
   } catch (error) {
     console.error("filterJobs error:", error);
-  } finally {
-    await prisma.$disconnect();
   }
 }
-
-filterJobs();
