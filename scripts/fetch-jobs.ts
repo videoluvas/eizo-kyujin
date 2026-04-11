@@ -172,6 +172,7 @@ await prisma.searchKeyword.update({
           snippet: job.snippet ?? null,
           update: job.update ? new Date(job.update) : null,
           lastSeenAt: now,
+                      sourceKeyword: target.keyword,
         },
         create: {
           url: job.url,
@@ -184,9 +185,9 @@ await prisma.searchKeyword.update({
           update: job.update ? new Date(job.update) : null,
           tracking: job.tracking ?? null,
           category,
-            sourceKeyword: target.keyword,
           firstSeenAt: now,
           lastSeenAt: now,
+                      sourceKeyword: target.keyword,
         },
       });
 
