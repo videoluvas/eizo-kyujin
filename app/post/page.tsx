@@ -9,17 +9,18 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: Promise<{ tag?: string }>;  // categoryからtagに変更
+  searchParams: Promise<{ tag?: string }>;
 };
 
 export default async function PostsPage({ searchParams }: Props) {
-  const { tag } = await searchParams;  // categoryからtagに変更
+  const { tag } = await searchParams;
 
-  const [posts, allPosts] = await Promise.all([
+  const [posts, sidejobPosts, allPosts, allSidejobPosts] = await Promise.all([
+    // 既存の転職記事
     prisma.post.findMany({
       where: {
         published: true,
-        ...(tag ? { tags: { has: tag } } : {}),  // tagsベースに変更
+        ...(tag ? { tags: { has: tag } } : {}),
       },
       orderBy: { publishedAt: "desc" },
       select: {
@@ -29,19 +30,63 @@ export default async function PostsPage({ searchParams }: Props) {
         metaDescription: true,
         thumbnail: true,
         category: true,
-        tags: true,       // tagsを追加
+        tags: true,
         author: true,
         publishedAt: true,
         readingTime: true,
       },
     }),
+    // 副業OK記事
+    prisma.postSidejob.findMany({
+      where: {
+        published: true,
+        ...(tag ? { tags: { has: tag } } : {}),
+      },
+      orderBy: { publishedAt: "desc" },
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        metaDescription: true,
+        thumbnail: true,
+        category: true,
+        tags: true,
+        author: true,
+        publishedAt: true,
+        readingTime: true,
+      },
+    }),
+    // タグ収集用（既存）
     prisma.post.findMany({
       where: { published: true },
-      select: { tags: true },  // tagsに変更
+      select: { tags: true },
+    }),
+    // タグ収集用（副業OK）
+    prisma.postSidejob.findMany({
+      where: { published: true },
+      select: { tags: true },
     }),
   ]);
 
-  const uniqueTags = [...new Set(allPosts.flatMap((p) => p.tags).filter(Boolean))];
+  // 両方のテーブルから記事をマージして日付順にソート
+  const allArticles = [
+    ...posts.map((p) => ({ ...p, type: "post" as const })),
+    ...sidejobPosts.map((p) => ({ ...p, type: "sidejob" as const })),
+  ].sort((a, b) => {
+    const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+    const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+    return dateB - dateA;
+  });
+
+  // タグ一覧をマージ
+  const uniqueTags = [
+    ...new Set(
+      [...allPosts, ...allSidejobPosts]
+        .flatMap((p) => p.tags)
+        .filter(Boolean)
+    ),
+  ];
+
   return (
     <Layout>
       {/* ヘッダー */}
@@ -70,48 +115,48 @@ export default async function PostsPage({ searchParams }: Props) {
         </div>
       </section>
 
-{/* タグフィルター */}
-<section className="section-box mt-30">
-  <div className="container">
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-      <Link href="/post">
-        <span
-          className={`btn ${!tag ? "btn-default" : "btn-grey-small"}`}
-          style={{ fontSize: "13px" }}
-        >
-          すべて
-        </span>
-      </Link>
-      {uniqueTags.map((t) => (
-        <Link key={t} href={`/post?tag=${encodeURIComponent(t)}`}>
-          <span
-            className={`btn ${tag === t ? "btn-default" : "btn-grey-small"}`}
-            style={{ fontSize: "13px" }}
-          >
-            {t}
-          </span>
-        </Link>
-      ))}
-    </div>
-  </div>
-</section>
+      {/* タグフィルター */}
+      <section className="section-box mt-30">
+        <div className="container">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+            <Link href="/post">
+              <span
+                className={`btn ${!tag ? "btn-default" : "btn-grey-small"}`}
+                style={{ fontSize: "13px" }}
+              >
+                すべて
+              </span>
+            </Link>
+            {uniqueTags.map((t) => (
+              <Link key={t} href={`/post?tag=${encodeURIComponent(t)}`}>
+                <span
+                  className={`btn ${tag === t ? "btn-default" : "btn-grey-small"}`}
+                  style={{ fontSize: "13px" }}
+                >
+                  {t}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* 記事グリッド */}
       <section className="section-box mt-30 mb-50">
         <div className="container">
-          {posts.length === 0 ? (
+          {allArticles.length === 0 ? (
             <div style={{ textAlign: "center", padding: "60px 0", color: "#888" }}>
               記事がありません
             </div>
           ) : (
             <div className="row mt-30">
-              {posts.map((post) => (
-                <div key={post.id} className="col-lg-4 col-md-6 col-sm-12 col-12 mb-30">
+              {allArticles.map((post) => (
+                <div key={`${post.type}-${post.id}`} className="col-lg-4 col-md-6 col-sm-12 col-12 mb-30">
                   <div className="card-grid-3 hover-up">
                     {/* サムネイル */}
                     <div className="text-center card-grid-3-image">
-                      <Link href={`/post/${post.slug}`}>
-                        <figure style={{ margin: 0, overflow: "hidden", borderRadius: "8px 8px 0 0" }}>
+                      <Link href={post.type === "sidejob" ? `/post-sidejob/${post.slug}` : `/post/${post.slug}`}>
+                        <figure style={{ margin: 0, overflow: "hidden", borderRadius: "8px 8px 0 0", position: "relative" }}>
                           <img
                             alt={post.title}
                             src={post.thumbnail || "https://pub-647b9765a3c242dcac081e185c116796.r2.dev/eizojob_post.png"}
@@ -122,6 +167,24 @@ export default async function PostsPage({ searchParams }: Props) {
                               filter: "brightness(0.93) saturate(1.1)",
                             }}
                           />
+                          {/* 副業OKバッジ */}
+                          {post.type === "sidejob" && (
+                            <span
+                              style={{
+                                position: "absolute",
+                                top: "10px",
+                                left: "10px",
+                                background: "#2da562",
+                                color: "#fff",
+                                fontSize: "11px",
+                                fontWeight: "700",
+                                padding: "3px 10px",
+                                borderRadius: "20px",
+                              }}
+                            >
+                              副業OK特集
+                            </span>
+                          )}
                         </figure>
                       </Link>
                     </div>
@@ -139,7 +202,7 @@ export default async function PostsPage({ searchParams }: Props) {
 
                       {/* タイトル */}
                       <h5>
-                        <Link href={`/post/${post.slug}`}>
+                        <Link href={post.type === "sidejob" ? `/post-sidejob/${post.slug}` : `/post/${post.slug}`}>
                           <span style={{
                             display: "-webkit-box",
                             WebkitLineClamp: 2,
