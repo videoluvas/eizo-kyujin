@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import BackToTop from "../elements/BackToTop";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -11,6 +12,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const [openClass, setOpenClass] = useState("");
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpenClass("");
+    document.body.classList.remove("mobile-menu-active");
+  }, [pathname]);
 
   const handleOpen = () => {
     document.body.classList.add("mobile-menu-active");
@@ -23,6 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
       document.body.classList.remove("mobile-menu-active");
     }
   };
+
   return (
     <>
       <div className="body-overlay-1" onClick={handleRemove} />

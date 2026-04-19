@@ -33,15 +33,15 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
               <div className="header-logo">
                 <Link href="/">
                   <span className="d-flex">
-<img
-  alt="映像求人PROポータル"
-  src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/eizo-job-logo%20(2).png"
-  style={{
-    height: "clamp(40px, 8vw, 80px)",
-    width: "auto",
-    objectFit: "contain"
-  }}
-/>
+                    <img
+                      alt="映像求人PROポータル"
+                      src="https://pub-647b9765a3c242dcac081e185c116796.r2.dev/eizo-job-logo%20(2).png"
+                      style={{
+                        height: "clamp(40px, 8vw, 80px)",
+                        width: "auto",
+                        objectFit: "contain"
+                      }}
+                    />
                   </span>
                 </Link>
               </div>
@@ -74,8 +74,8 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
                     </Link>
                   </li>
                   <li>
-                      <Link href="https://www.luvas.red/">
-                        <span>運営会社</span>
+                    <Link href="https://www.luvas.red/">
+                      <span>運営会社</span>
                     </Link>
                   </li>
                 </ul>
@@ -92,37 +92,6 @@ const Header = ({ handleOpen, handleRemove, openClass }: HeaderProps) => {
           </div>
         </div>
       </header>
-
-      <div className="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
-        <div className="mobile-header-wrapper-inner">
-          <div className="mobile-header-content-area">
-            <div className="perfect-scroll">
-<div className="mobile-menu-wrap mobile-header-border">
-                <nav>
-                  <ul className="mobile-menu font-heading">
-                    <li>
-                      <Link href="/jobs-list">
-                        <span>求人検索</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="https://www.luvas.red/">
-                        <span>運営会社</span>
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-
-              <div className="site-copyright">
-                Copyright © 2026 LUVAS. 
-                <br />
-                All rights reserved
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
   );
 };

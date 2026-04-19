@@ -18,10 +18,10 @@ const groupConfig: Record<string, { label: string; icon: string }> = {
   業界: { label: "業界", icon: "assets/imgs/page/homepage1/finance.svg" },
   技術: { label: "技術", icon: "assets/imgs/page/homepage1/lightning.svg" },
   役職: { label: "役職", icon: "assets/imgs/page/homepage1/management.svg" },
-  SNS: { label: "SNS", icon: "assets/imgs/page/homepage1/marketing.svg" },
+  特徴: { label: "特徴", icon: "assets/imgs/page/homepage1/marketing.svg" },
 };
 
-const groupOrder = ["業界", "技術", "役職", "SNS"];
+const groupOrder = ["業界", "技術", "役職", "特徴"];
 
 const CategorySlider = ({ categories }: Props) => {
   const router = useRouter();
