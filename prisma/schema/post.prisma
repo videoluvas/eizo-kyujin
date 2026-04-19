@@ -43,3 +43,84 @@ model Post {
 
   @@map("posts")
 }
+
+model PostSidejob {
+  id              Int       @id @default(autoincrement())
+  slug            String    @unique
+  title           String    @default("")
+  thumbnail       String    @default("")
+  category        String    @default("")
+  published       Boolean   @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  author          String    @default("映像求人PRO編集部")
+  metaTitle       String    @default("")
+  metaDescription String    @default("")
+  ogImage         String    @default("")
+  relatedCategory String    @default("")
+  tags            String[]
+  readingTime     Int       @default(0)
+
+  // H1
+  h1_suffix       String    @default("")
+
+  // リード
+  lead            String    @default("")
+
+  // H2① 副業と両立しやすいか？
+  h2_1_title      String    @default("")
+  h3_1_1          String    @default("")
+  p_1_1           String    @default("")
+  h3_1_2          String    @default("")
+  p_1_2           String    @default("")
+  h3_1_3          String    @default("")
+  p_1_3           String    @default("")
+
+  // H2② 収入イメージ
+  h2_2_title      String    @default("")
+  h3_2_1          String    @default("")
+  p_2_1           String    @default("")
+  h3_2_2          String    @default("")
+  p_2_2           String    @default("")
+  h3_2_3          String    @default("")
+  p_2_3           String    @default("")
+
+  // H2③ 副業しやすい会社の特徴
+  h2_3_title      String    @default("")
+  h3_3_1          String    @default("")
+  p_3_1           String    @default("")
+  h3_3_2          String    @default("")
+  p_3_2           String    @default("")
+  h3_3_3          String    @default("")
+  p_3_3           String    @default("")
+
+  // H2④ 求人選びのポイント
+  h2_4_title      String    @default("")
+  h3_4_1          String    @default("")
+  p_4_1           String    @default("")
+  h3_4_2          String    @default("")
+  p_4_2           String    @default("")
+  h3_4_3          String    @default("")
+  p_4_3           String    @default("")
+
+  // H2⑤ 面接で副業を伝えるべきか（固定・H3×1）
+  h2_5_title      String    @default("")
+  h3_5_1          String    @default("")
+  p_5_1           String    @default("")
+
+  // H2⑥ 両立しやすい人・注意点
+  h2_6_title      String    @default("")
+  h3_6_1          String    @default("")
+  p_6_1           String    @default("")
+  h3_6_2          String    @default("")
+  p_6_2           String    @default("")
+  h3_6_3          String    @default("")
+  p_6_3           String    @default("")
+
+  // H2⑦ CV導線（固定・本文のみ）
+  h2_7_title      String    @default("")
+  p_7_1           String    @default("")
+
+  @@map("posts_sidejob")
+}
