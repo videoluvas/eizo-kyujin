@@ -12,6 +12,8 @@ import SidejobSection1, {
   SidejobSection6Fit,
 } from "@/components/post-sidejob/SidejobSections";
 import SidejobSection7CTA from "@/components/post-sidejob/SidejobSection7CTA";
+import SidejobJobsSection from "@/components/post-sidejob/SidejobJobsSection";
+import CTABanner from "@/components/post/CTABanner";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -39,14 +41,18 @@ export default async function SidejobPostPage({ params }: Props) {
   const post = await prisma.postSidejob.findUnique({ where: { slug, published: true } });
   if (!post) notFound();
 
-  const [categories, relatedJobs] = await Promise.all([
+  const [categories, sidejobJobsRaw] = await Promise.all([
     prisma.category.findMany({ orderBy: { order: "desc" } }),
     prisma.job.findMany({
-      where: { category: { has: post.category } },
+      where: { category: { has: "副業OK" } },
       orderBy: { updatedAt: "desc" },
-      take: 6,
+      take: 20,
     }),
   ]);
+
+  const sidejobJobs = sidejobJobsRaw
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 6);
 
   return (
     <Layout>
@@ -57,12 +63,15 @@ export default async function SidejobPostPage({ params }: Props) {
             <SidejobPostHeader post={post} />
             <SidejobTableOfContents post={post} />
             <SidejobSection1 post={post} />
+            <CTABanner />
+            <SidejobJobsSection jobs={sidejobJobs} category={post.category} />
             <SidejobSection2Income post={post} />
             <SidejobSection3Company post={post} />
             <SidejobSection4Points post={post} />
             <SidejobSection5Interview post={post} />
             <SidejobSection6Fit post={post} />
-            <SidejobSection7CTA post={post} jobs={relatedJobs} categories={categories} />
+            <CTABanner />
+            <SidejobSection7CTA post={post} categories={categories} />
           </div>
 
           {/* サイドバー */}

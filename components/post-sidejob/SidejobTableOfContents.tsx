@@ -13,6 +13,7 @@ type TocItem = {
 function buildToc(post: PostSidejob): TocItem[] {
   const items: TocItem[] = [];
   if (post.h2_1_title) items.push({ id: "section-1", label: post.h2_1_title });
+  items.push({ id: "sidejob-jobs", label: `現在掲載中の副業OK${post.category}関連の映像求人` });
   if (post.h2_2_title) items.push({ id: "section-2", label: post.h2_2_title });
   if (post.h2_3_title) items.push({ id: "section-3", label: post.h2_3_title });
   if (post.h2_4_title) items.push({ id: "section-4", label: post.h2_4_title });

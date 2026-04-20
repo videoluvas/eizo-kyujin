@@ -10,6 +10,7 @@ import PostSection3Skills from "@/components/post/PostSection3Skills";
 import PostSection4Salary from "@/components/post/PostSection4Salary";
 import PostSection5Points from "@/components/post/PostSection5Points";
 import PostSection6Categories from "@/components/post/PostSection6Categories";
+import CTABanner from "@/components/post/CTABanner";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -55,10 +56,12 @@ export default async function PostPage({ params }: Props) {
             <PostHeader post={post} />
             <PostTableOfContents post={post} />
             <PostSection1 post={post} />
+            <CTABanner />
             <PostSection2Jobs jobs={relatedJobs} category={post.category} />
             <PostSection3Skills post={post} />
             <PostSection4Salary post={post} />
             <PostSection5Points post={post} />
+            <CTABanner />
             <PostSection6Categories categories={categories} currentCategory={post.category} />
           </div>
 
