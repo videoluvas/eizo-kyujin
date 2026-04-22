@@ -155,7 +155,7 @@ export default async function PostsPage({ searchParams }: Props) {
                   <div className="card-grid-3 hover-up">
                     {/* サムネイル */}
                     <div className="text-center card-grid-3-image">
-                      <Link href={post.type === "sidejob" ? `/post-sidejob/${post.slug}` : `/post/${post.slug}`}>
+                      <Link href={`/post/${post.slug}`}>
                         <figure style={{ margin: 0, overflow: "hidden", borderRadius: "8px 8px 0 0", position: "relative" }}>
                           <img
                             alt={post.title}
@@ -202,7 +202,7 @@ export default async function PostsPage({ searchParams }: Props) {
 
                       {/* タイトル */}
                       <h5>
-                        <Link href={post.type === "sidejob" ? `/post-sidejob/${post.slug}` : `/post/${post.slug}`}>
+                        <Link href={`/post/${post.slug}`}>
                           <span style={{
                             display: "-webkit-box",
                             WebkitLineClamp: 2,

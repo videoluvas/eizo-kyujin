@@ -57,7 +57,7 @@ model Category {
   keywords String @default("")
   order    Int    @default(0)
   icon     String @default("")
-  relatedGroup String @default("") 
+  relatedGroup String @default("") @map("related_group")  
 
   @@map("categories")
 }
