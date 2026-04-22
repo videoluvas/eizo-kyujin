@@ -78,7 +78,7 @@ export default async function JobList({ searchParams }: Props) {
   }
 
   const [jobs, workStyles, areas, categories] = await Promise.all([
-    prisma.job.findMany({ where, orderBy: { updatedAt: "desc" } }),
+    prisma.job.findMany({ where, orderBy: { update: "desc" } }),
     prisma.workStyle.findMany({ orderBy: { id: "asc" } }),
     prisma.area.findMany({ orderBy: { id: "asc" } }),
     prisma.category.findMany({ orderBy: { name: "asc" } }),
@@ -101,8 +101,21 @@ export default async function JobList({ searchParams }: Props) {
               <div className="banner-hero banner-single banner-single-bg">
                 <div className="block-banner text-center">
                   <h2 className="wow animate__animated animate__fadeInUp">
-                    映像業界の転職求人を検索
-                  </h2>
+  映像業界の転職求人を検索
+  <span style={{
+    fontSize: "13px",
+    fontWeight: "700",
+    background: "linear-gradient(135deg, #0EA5E9, #3B64F4)",
+    color: "#fff",
+    borderRadius: "20px",
+    padding: "3px 12px",
+    marginLeft: "12px",
+    verticalAlign: "middle",
+    letterSpacing: "0.5px",
+  }}>
+    ● 毎分更新中
+  </span>
+</h2>
                   <div className="font-sm color-text-paragraph-2 mt-10 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                     映像制作者・動画クリエイター向けの転職求人を掲載中。
                     <br className="d-none d-xl-block" />

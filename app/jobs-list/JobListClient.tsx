@@ -43,9 +43,7 @@ export default function JobListClient({ jobs, total }: Props) {
   const router = useRouter();
   const searchParamsHook = useSearchParams();
 
-  // PC専用レイアウト
   const [layout, setLayout] = useState<"list" | "grid2" | "grid3">("list");
-  // モバイル専用レイアウト（両方1列、スニペット有無のみ違い）
   const [mobileLayout, setMobileLayout] = useState<"list" | "compact">("list");
 
   const [sortOpen, setSortOpen] = useState(false);
@@ -76,8 +74,11 @@ export default function JobListClient({ jobs, total }: Props) {
     switch (sortOrder) {
       case "recommended":
         return b.category.length - a.category.length;
-      case "newest":
-        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      case "newest": {
+        const dateB = b.update ? new Date(b.update).getTime() : 0;
+        const dateA = a.update ? new Date(a.update).getTime() : 0;
+        return dateB - dateA;
+      }
       case "salary_min_high":
         return extractMinSalary(b.st) - extractMinSalary(a.st);
       case "salary_max_high":
@@ -92,14 +93,12 @@ export default function JobListClient({ jobs, total }: Props) {
   const end = start + perPage;
   const displayedJobs = sortedJobs.slice(start, end);
 
-  // PC用グリッドクラス（モバイル列数は指定しない）
   const pcGridClass = {
     list: "col-xl-12 col-lg-12 col-md-12",
     grid2: "col-xl-6 col-lg-6 col-md-6",
     grid3: "col-xl-4 col-lg-4 col-md-4",
   }[layout];
 
-  // モバイル用グリッドクラス（両方1列）
   const mobileGridClass = "col-12";
 
   return (
@@ -180,11 +179,7 @@ export default function JobListClient({ jobs, total }: Props) {
 
       {/* ========== モバイル用フィルターバー（md未満） ========== */}
       <div className="box-filters-job d-md-none" style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-
-        {/* 1行目：表示件数・並び順 */}
         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-
-          {/* 表示件数 */}
           <div className="box-border" style={{ position: "relative", width: "auto" }}>
             <div className="dropdown dropdown-sort">
               <button className="btn dropdown-toggle" style={{ fontSize: "12px", padding: "4px 8px", width: "auto" }} onClick={() => { setMobilePerPageOpen(!mobilePerPageOpen); setMobileSortOpen(false); }}>
@@ -204,8 +199,6 @@ export default function JobListClient({ jobs, total }: Props) {
               )}
             </div>
           </div>
-
-          {/* 並び順 */}
           <div className="box-border" style={{ position: "relative", width: "auto" }}>
             <div className="dropdown dropdown-sort">
               <button className="btn dropdown-toggle" style={{ fontSize: "12px", padding: "4px 8px", width: "auto" }} onClick={() => { setMobileSortOpen(!mobileSortOpen); setMobilePerPageOpen(false); }}>
@@ -225,10 +218,7 @@ export default function JobListClient({ jobs, total }: Props) {
               )}
             </div>
           </div>
-
         </div>
-
-        {/* 2行目：件数表示・レイアウト切替 */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span style={{ fontSize: "12px", color: "#66789c", lineHeight: 1 }}>
             <strong>{start + 1}-{Math.min(end, total)}</strong> / <strong>{total}件</strong>
@@ -242,7 +232,6 @@ export default function JobListClient({ jobs, total }: Props) {
             </span>
           </div>
         </div>
-
       </div>
 
       {/* ========== PC用カードリスト（md以上） ========== */}
@@ -329,7 +318,6 @@ export default function JobListClient({ jobs, total }: Props) {
             <div key={job.id} className={mobileGridClass}>
               <div className="card-grid-2 hover-up">
                 <div className="card-block-info" style={{ padding: "12px" }}>
-                  {/* 会社名・エリア・雇用形態・日付 */}
                   <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "6px", marginBottom: "4px" }}>
                     <a href={job.url} target="_blank" rel="noopener">
                       <span style={{ color: "#3B64F4", fontWeight: "600", fontSize: "13px" }}>{job.company}</span>
@@ -342,11 +330,9 @@ export default function JobListClient({ jobs, total }: Props) {
                       </span>
                     )}
                   </div>
-                  {/* タイトル */}
                   <h4 style={{ fontSize: "14px", marginBottom: "4px", lineHeight: "1.4" }}>
                     <a href={job.url} target="_blank" rel="noopener">{job.title}</a>
                   </h4>
-                  {/* カテゴリ */}
                   {job.category.length > 0 && (
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "3px", marginBottom: "4px" }}>
                       {job.category.map((cat) => (
@@ -356,13 +342,11 @@ export default function JobListClient({ jobs, total }: Props) {
                       ))}
                     </div>
                   )}
-                  {/* スニペット（compactのときは非表示） */}
                   {job.snippet && mobileLayout !== "compact" && (
                     <p style={{ fontSize: "12px", color: "#66789c", margin: "4px 0 6px", lineHeight: "1.5" }}>
                       {job.snippet}
                     </p>
                   )}
-                  {/* 給与・詳細ボタン */}
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", marginTop: "6px" }}>
                     <span className="card-text-price" style={{ fontSize: "13px", whiteSpace: "nowrap", display: "flex", alignItems: "center" }}>{job.st}</span>
                     <a href={job.url} target="_blank" rel="noopener" className="btn btn-apply-now" style={{ width: "auto", display: "inline-block", padding: "6px 12px", fontSize: "12px", flexShrink: 0 }}>詳細を見る</a>
