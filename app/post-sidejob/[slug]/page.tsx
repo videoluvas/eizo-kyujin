@@ -13,7 +13,9 @@ import SidejobSection1, {
 } from "@/components/post-sidejob/SidejobSections";
 import SidejobSection7CTA from "@/components/post-sidejob/SidejobSection7CTA";
 import SidejobJobsSection from "@/components/post-sidejob/SidejobJobsSection";
+import PostRelatedArticles from "@/components/post/PostRelatedArticles";
 import CTABanner from "@/components/post/CTABanner";
+import { getRelatedSidejobPosts } from "@/app/lib/getRelatedPosts";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -41,13 +43,13 @@ export default async function SidejobPostPage({ params }: Props) {
   const post = await prisma.postSidejob.findUnique({ where: { slug, published: true } });
   if (!post) notFound();
 
-  const [categories, sidejobJobsRaw] = await Promise.all([
-    prisma.category.findMany({ orderBy: { order: "desc" } }),
+  const [sidejobJobsRaw, relatedPosts] = await Promise.all([
     prisma.job.findMany({
       where: { category: { has: "副業OK" } },
       orderBy: { updatedAt: "desc" },
       take: 20,
     }),
+    getRelatedSidejobPosts(post),
   ]);
 
   const sidejobJobs = sidejobJobsRaw
@@ -58,7 +60,6 @@ export default async function SidejobPostPage({ params }: Props) {
     <Layout>
       <div className="container" style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 16px" }}>
         <div className="row">
-          {/* メインコンテンツ */}
           <div className="col-lg-8 col-12">
             <SidejobPostHeader post={post} />
             <SidejobTableOfContents post={post} />
@@ -71,10 +72,8 @@ export default async function SidejobPostPage({ params }: Props) {
             <SidejobSection5Interview post={post} />
             <SidejobSection6Fit post={post} />
             <CTABanner />
-            <SidejobSection7CTA post={post} categories={categories} />
+            <PostRelatedArticles posts={relatedPosts} />
           </div>
-
-          {/* サイドバー */}
           <div className="col-lg-4 col-12 d-none d-lg-block">
             <div style={{ position: "sticky", top: "150px" }}>
               <SidejobTableOfContents post={post} isSidebar />
