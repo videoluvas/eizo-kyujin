@@ -91,6 +91,17 @@ export async function filterJobs() {
     }
 
     console.log(`[${now.toISOString()}] 合計アーカイブ=${totalArchived}`);
+
+    // 1日以上前のアーカイブを削除
+    const cutoff = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const deleted = await prisma.archivedJob.deleteMany({
+      where: { archivedAt: { lt: cutoff } },
+    });
+
+    if (deleted.count > 0) {
+      console.log(`[${now.toISOString()}] 古いアーカイブ削除=${deleted.count}`);
+    }
+
   } catch (error) {
     console.error("filterJobs error:", error);
   }
