@@ -45,11 +45,11 @@ export default async function Home() {
   const categoryJobs = await Promise.all(
     featuredCategories.map(async (cat) => ({
       category: cat,
-      jobs: await prisma.job.findMany({
-        where: { category: { has: cat.name } },
-        orderBy: { updatedAt: "desc" },
-        take: 8,
-      }),
+jobs: await prisma.job.findMany({
+  where: { category: { has: cat.name } },
+  orderBy: { update: "desc" },
+  take: 8,
+}),
     }))
   );
 
