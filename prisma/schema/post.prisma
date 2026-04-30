@@ -63,73 +63,74 @@ model PostSidejob {
   readingTime     Int       @default(0)
 
   // H1
-  h1_suffix       String    @default("")
+  h1_suffix String @default("")
 
   // リード
-  lead            String    @default("")
+  lead String @default("")
 
   // H2① 副業と両立しやすいか？
-  h2_1_title      String    @default("")
-  h3_1_1          String    @default("")
-  p_1_1           String    @default("")
-  h3_1_2          String    @default("")
-  p_1_2           String    @default("")
-  h3_1_3          String    @default("")
-  p_1_3           String    @default("")
+  h2_1_title String @default("")
+  h3_1_1     String @default("")
+  p_1_1      String @default("")
+  h3_1_2     String @default("")
+  p_1_2      String @default("")
+  h3_1_3     String @default("")
+  p_1_3      String @default("")
 
   // H2② 収入イメージ
-  h2_2_title      String    @default("")
-  h3_2_1          String    @default("")
-  p_2_1           String    @default("")
-  h3_2_2          String    @default("")
-  p_2_2           String    @default("")
-  h3_2_3          String    @default("")
-  p_2_3           String    @default("")
+  h2_2_title String @default("")
+  h3_2_1     String @default("")
+  p_2_1      String @default("")
+  h3_2_2     String @default("")
+  p_2_2      String @default("")
+  h3_2_3     String @default("")
+  p_2_3      String @default("")
 
   // H2③ 副業しやすい会社の特徴
-  h2_3_title      String    @default("")
-  h3_3_1          String    @default("")
-  p_3_1           String    @default("")
-  h3_3_2          String    @default("")
-  p_3_2           String    @default("")
-  h3_3_3          String    @default("")
-  p_3_3           String    @default("")
+  h2_3_title String @default("")
+  h3_3_1     String @default("")
+  p_3_1      String @default("")
+  h3_3_2     String @default("")
+  p_3_2      String @default("")
+  h3_3_3     String @default("")
+  p_3_3      String @default("")
 
   // H2④ 求人選びのポイント
-  h2_4_title      String    @default("")
-  h3_4_1          String    @default("")
-  p_4_1           String    @default("")
-  h3_4_2          String    @default("")
-  p_4_2           String    @default("")
-  h3_4_3          String    @default("")
-  p_4_3           String    @default("")
+  h2_4_title String @default("")
+  h3_4_1     String @default("")
+  p_4_1      String @default("")
+  h3_4_2     String @default("")
+  p_4_2      String @default("")
+  h3_4_3     String @default("")
+  p_4_3      String @default("")
 
   // H2⑤ 面接で副業を伝えるべきか（固定・H3×1）
-  h2_5_title      String    @default("")
-  h3_5_1          String    @default("")
-  p_5_1           String    @default("")
+  h2_5_title String @default("")
+  h3_5_1     String @default("")
+  p_5_1      String @default("")
 
   // H2⑥ 両立しやすい人・注意点
-  h2_6_title      String    @default("")
-  h3_6_1          String    @default("")
-  p_6_1           String    @default("")
-  h3_6_2          String    @default("")
-  p_6_2           String    @default("")
-  h3_6_3          String    @default("")
-  p_6_3           String    @default("")
+  h2_6_title String @default("")
+  h3_6_1     String @default("")
+  p_6_1      String @default("")
+  h3_6_2     String @default("")
+  p_6_2      String @default("")
+  h3_6_3     String @default("")
+  p_6_3      String @default("")
 
   // H2⑦ CV導線（固定・本文のみ）
-  h2_7_title      String    @default("")
-  p_7_1           String    @default("")
+  h2_7_title String @default("")
+  p_7_1      String @default("")
 
   @@map("posts_sidejob")
 }
+
 model PostArea {
   id              Int       @id @default(autoincrement())
-  slug            String    @unique  // 例: area-Tokyo
+  slug            String    @unique // 例: area-Tokyo
   title           String    @default("")
   thumbnail       String    @default("")
-  category        String    @default("")  // 都道府県名 例: 東京都
+  category        String    @default("") // 都道府県名 例: 東京都
   published       Boolean   @default(false)
   publishedAt     DateTime?
   createdAt       DateTime  @default(now())
@@ -143,84 +144,84 @@ model PostArea {
   readingTime     Int       @default(0)
 
   // H1
-  h1              String    @default("")
+  h1 String @default("")
 
   // リード
-  lead            String    @default("")
+  lead String @default("")
 
   // H2① 動的
-  h2_1_title      String    @default("")
-  h3_1_1          String    @default("")
-  p_1_1           String    @default("")
-  h3_1_2          String    @default("")
-  p_1_2           String    @default("")
-  h3_1_3          String    @default("")
-  p_1_3           String    @default("")
+  h2_1_title String @default("")
+  h3_1_1     String @default("")
+  p_1_1      String @default("")
+  h3_1_2     String @default("")
+  p_1_2      String @default("")
+  h3_1_3     String @default("")
+  p_1_3      String @default("")
 
   // H2② 固定（新着求人・見出しのみ）
-  h2_2_title      String    @default("")
+  h2_2_title String @default("")
 
   // H2③ 固定（業種）
-  h2_3_title      String    @default("")
-  h3_3_1          String    @default("")
-  p_3_1           String    @default("")
-  h3_3_2          String    @default("")
-  p_3_2           String    @default("")
-  h3_3_3          String    @default("")
-  p_3_3           String    @default("")
-  h3_3_4          String    @default("")
-  p_3_4           String    @default("")
-  h3_3_5          String    @default("")
-  p_3_5           String    @default("")
+  h2_3_title String @default("")
+  h3_3_1     String @default("")
+  p_3_1      String @default("")
+  h3_3_2     String @default("")
+  p_3_2      String @default("")
+  h3_3_3     String @default("")
+  p_3_3      String @default("")
+  h3_3_4     String @default("")
+  p_3_4      String @default("")
+  h3_3_5     String @default("")
+  p_3_5      String @default("")
 
   // H2④ 固定（仕事内容）
-  h2_4_title      String    @default("")
-  h3_4_1          String    @default("")
-  p_4_1           String    @default("")
-  h3_4_2          String    @default("")
-  p_4_2           String    @default("")
-  h3_4_3          String    @default("")
-  p_4_3           String    @default("")
-  h3_4_4          String    @default("")
-  p_4_4           String    @default("")
-  h3_4_5          String    @default("")
-  p_4_5           String    @default("")
+  h2_4_title String @default("")
+  h3_4_1     String @default("")
+  p_4_1      String @default("")
+  h3_4_2     String @default("")
+  p_4_2      String @default("")
+  h3_4_3     String @default("")
+  p_4_3      String @default("")
+  h3_4_4     String @default("")
+  p_4_4      String @default("")
+  h3_4_5     String @default("")
+  p_4_5      String @default("")
 
   // H2⑤ 固定（働き方）
-  h2_5_title      String    @default("")
-  h3_5_1          String    @default("")  // 在宅OK
-  p_5_1           String    @default("")
-  h3_5_2          String    @default("")  // 副業OK
-  p_5_2           String    @default("")
-  h3_5_3          String    @default("")  // 未経験OK
-  p_5_3           String    @default("")
+  h2_5_title String @default("")
+  h3_5_1     String @default("") // 在宅OK
+  p_5_1      String @default("")
+  h3_5_2     String @default("") // 副業OK
+  p_5_2      String @default("")
+  h3_5_3     String @default("") // 未経験OK
+  p_5_3      String @default("")
 
   // H2⑥ 固定（エリア）
-  h2_6_title      String    @default("")
-  h3_6_1          String    @default("")
-  p_6_1           String    @default("")
-  h3_6_2          String    @default("")
-  p_6_2           String    @default("")
-  h3_6_3          String    @default("")
-  p_6_3           String    @default("")
+  h2_6_title String @default("")
+  h3_6_1     String @default("")
+  p_6_1      String @default("")
+  h3_6_2     String @default("")
+  p_6_2      String @default("")
+  h3_6_3     String @default("")
+  p_6_3      String @default("")
 
   // H2⑦ 固定（給与相場）
-  h2_7_title      String    @default("")
-  h3_7_1          String    @default("")
-  p_7_1           String    @default("")
+  h2_7_title String @default("")
+  h3_7_1     String @default("")
+  p_7_1      String @default("")
 
   // H2⑧ 固定（FAQ）
-  h2_8_title      String    @default("")
-  h3_8_1          String    @default("")
-  p_8_1           String    @default("")
-  h3_8_2          String    @default("")
-  p_8_2           String    @default("")
-  h3_8_3          String    @default("")
-  p_8_3           String    @default("")
+  h2_8_title String @default("")
+  h3_8_1     String @default("")
+  p_8_1      String @default("")
+  h3_8_2     String @default("")
+  p_8_2      String @default("")
+  h3_8_3     String @default("")
+  p_8_3      String @default("")
 
   // H2⑨ 動的（CV導線）
-  h2_9_title      String    @default("")
-  p_9_1           String    @default("")
+  h2_9_title String @default("")
+  p_9_1      String @default("")
 
   @@map("posts_area")
 }
